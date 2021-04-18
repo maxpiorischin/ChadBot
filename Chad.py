@@ -1,19 +1,19 @@
 import discord
-import Token
 import os
 from discord.ext import commands
 
 gifs_list = ["vibecat", "ridecat", "trumpetcat", "rainbowroach"]
+token = os.getenv("CHAD_BOT_TOKEN")
 
 if __name__ == '__main__':
     client = commands.Bot(command_prefix=".")
-
 
 
     @client.event
     async def on_ready():
         await client.change_presence(status=discord.Status.online, activity=discord.Game("Hmmmmm"))
         print("Chad is ready!")
+
 
     @client.command()
     async def hello(ctx):
@@ -24,8 +24,9 @@ if __name__ == '__main__':
     async def gifs(ctx):
         message = ""
         for gif in gifs_list:
-            message+= gif + "  "
+            message += gif + "  "
         await ctx.send("Gif commands are: " + message)
+
 
     @client.command()
     async def vibecat(ctx):
@@ -47,6 +48,4 @@ if __name__ == '__main__':
         await ctx.send("https://cdn.discordapp.com/emojis/833211453346807858.gif?v=1")
 
 
-
-    client.run(Token.token)
-
+    client.run(token)
