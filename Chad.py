@@ -1,5 +1,6 @@
 import discord
 import os
+import random
 from discord.ext import commands
 
 gifs_list = ["vibecat", "ridecat", "trumpetcat", "rainbowroach"]
@@ -19,6 +20,16 @@ if __name__ == '__main__':
     async def hello(ctx):
         await ctx.send("Hello, I am Chad")
 
+    @client.command()
+    async def sheesh(ctx):
+        x = "e" * random.randrange(2,30)
+        await ctx.send("sh" + x + "sh")
+
+    @client.command()
+    async def pp(ctx):
+        message_author = ctx.message.author.name
+        x = "=" * random.randrange(2, 40)
+        await ctx.send(message_author + "'s pp length:  8" + x + "D")
 
     @client.command()
     async def gifs(ctx):
