@@ -7,6 +7,7 @@ authors = ["maxp25 <<>>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 discord = "^1.0.1"
+replit = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 

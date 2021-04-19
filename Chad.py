@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.utils import find
+from replit import db
 import json
 import os
 import random
@@ -9,11 +10,10 @@ gifs_list = ["vibecat", "ridecat", "trumpetcat", "rainbowroach"]
 token = os.getenv("CHAD_BOT_TOKEN")
 
 
-# gets the prefix from the json file
+# gets the prefix from database
 def get_prefix(client, message):
-    with open("data/prefixes.json", "r") as f:
-        prefixes = json.load(f)
-    return prefixes[str(message.guild.id)]
+
+    return db[str(message.guild.id)]
 
 
 if __name__ == '__main__':
@@ -33,12 +33,8 @@ if __name__ == '__main__':
 
     @client.event
     async def on_guild_join(guild):
-        with open("data/prefixes.json", "r") as f:
-            prefixes = json.load(f)
-        prefixes[str(guild.id)] = "."
 
-        with open("data/prefixes.json", "w") as f:
-            json.dump(prefixes, f, indent=4)
+        db[str(guild.id)] = "."
 
         general = guild.text_channels[0]
         if general and general.permissions_for(guild.me).send_messages:
@@ -46,26 +42,19 @@ if __name__ == '__main__':
 
     @client.event
     async def on_guild_remove(guild):
-        with open("data/prefixes.json", "r") as f:
-            prefixes = json.load(f)
 
-        prefixes.pop(str(guild.id))
-
-        with open("data/prefixes.json", "w") as f:
-            json.dump(prefixes, f, indent=4)
+        del db[str(guild.id)]
 
 
     @client.command()
     @commands.has_permissions(administrator=True)
     async def changeprefix(ctx, prefix):
-        with open("data/prefixes.json", "r") as f:
-            prefixes = json.load(f)
-        prefixes[str(ctx.guild.id)] = prefix
 
-        with open("data/prefixes.json", "w") as f:
-            json.dump(prefixes, f, indent=4)
+        db[str(ctx.guild.id)] = prefix
 
-        await ctx.send(f"Prefix changed to {prefix}")
+        message = f"Prefix changed to {prefix}"
+        print(message)
+        await ctx.send(message)
 
 
     @client.command()
