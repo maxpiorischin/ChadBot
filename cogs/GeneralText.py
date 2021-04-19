@@ -2,11 +2,12 @@ import discord
 from discord.ext import commands
 import random
 
-class GeneralText(commands.cog):
+class GeneralText(commands.Cog):
     """ General text commands, such as .hello, .sheesh, .pp"""
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, client):
+        self.client = client
 
+    #commands
     @commands.command()
     async def hello(self, ctx):
         await ctx.send("Hello, I am Chad")
@@ -23,6 +24,6 @@ class GeneralText(commands.cog):
         await ctx.send(message_author + "'s pp length:  8" + x + "D")
 
 
-def setup(bot):
-    bot.add_cog(GeneralText(bot))
+def setup(client):
+    client.add_cog(GeneralText(client))
 
