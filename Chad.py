@@ -4,6 +4,10 @@ from replit import db
 import os
 
 token = os.getenv("CHAD_BOT_TOKEN")
+# Change only the no_category default string
+help_command = commands.DefaultHelpCommand(no_category = 'ModifyExtensions')
+
+
 
 
 # gets the prefix from database
@@ -13,7 +17,7 @@ def get_prefix(client, message):
 
 
 if __name__ == '__main__':
-    client = commands.Bot(command_prefix=get_prefix)
+    client = commands.Bot(command_prefix=get_prefix, help_command = help_command)
 
 
     @client.event
