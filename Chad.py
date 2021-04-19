@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
-from discord.utils import find
 from replit import db
-import json
 import os
 import random
 
