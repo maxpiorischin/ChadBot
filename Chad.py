@@ -106,4 +106,17 @@ if __name__ == '__main__':
         await ctx.send("https://cdn.discordapp.com/emojis/833211453346807858.gif?v=1")
 
 
+    print("-------------------")
+    for cog in os.listdir("./cogs"):
+        if cog.endswith(".py"):
+            try:
+                cog = f"cogs.{cog.replace('.py', '')}"
+                client.load_extension(cog)
+                print(f"{cog} Loaded!")
+            except Exception as e:
+                print(f"{cog} cannot be loaded:")
+                raise e
+    print("-------------------")
+
+
     client.run(token)
