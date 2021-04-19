@@ -33,11 +33,11 @@ if __name__ == '__main__':
 
     @client.event
     async def on_guild_join(guild):
-        with open("prefixes.json", "r") as f:
+        with open("data/prefixes.json", "r") as f:
             prefixes = json.load(f)
         prefixes[str(guild.id)] = "."
 
-        with open("prefixes.json", "w") as f:
+        with open("data/prefixes.json", "w") as f:
             json.dump(prefixes, f, indent=4)
 
         general = guild.text_channels[0]
@@ -46,23 +46,23 @@ if __name__ == '__main__':
 
     @client.event
     async def on_guild_remove(guild):
-        with open("prefixes.json", "r") as f:
+        with open("data/prefixes.json", "r") as f:
             prefixes = json.load(f)
 
         prefixes.pop(str(guild.id))
 
-        with open("prefixes.json", "w") as f:
+        with open("data/prefixes.json", "w") as f:
             json.dump(prefixes, f, indent=4)
 
 
     @client.command()
     @commands.has_permissions(administrator=True)
     async def changeprefix(ctx, prefix):
-        with open("prefixes.json", "r") as f:
+        with open("data/prefixes.json", "r") as f:
             prefixes = json.load(f)
         prefixes[str(ctx.guild.id)] = prefix
 
-        with open("prefixes.json", "w") as f:
+        with open("data/prefixes.json", "w") as f:
             json.dump(prefixes, f, indent=4)
 
         await ctx.send(f"Prefix changed to {prefix}")
