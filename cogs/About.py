@@ -44,7 +44,7 @@ class About(commands.Cog):
                 cog_commands = self.client.get_cog(query.capitalize()).get_commands()
                 print("hello")
                 for com in cog_commands:
-                    commands_desc += f"{command_prefix}{com}\n"
+                    commands_desc += f"{command_prefix}{com} - Aliases: {com.aliases}\n"
                 embed = discord.Embed(
                     title="ChadBot Help",
                     description=f"These are all the commands for category {query}!\n",
