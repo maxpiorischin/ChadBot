@@ -18,7 +18,7 @@ def get_prefix(client, message):
 
 if __name__ == '__main__':
     client = commands.Bot(command_prefix=get_prefix, help_command = help_command)
-
+    client.remove_command('help')
 
     @client.event
     async def on_ready():
