@@ -16,6 +16,7 @@ class About(commands.Cog):
     @commands.has_permissions(embed_links = True)
     async def help(self, ctx):
       command_prefix = self.client.command_prefix(self.client, ctx.message)
+      cogs_list = [c for c in self.client.cogs]
       cogs_desc = ""
       private_cogs = ['Fortnut']
       for cog in self.client.cogs:
@@ -23,23 +24,24 @@ class About(commands.Cog):
           cogs_desc += f"`{cog}` - {self.client.cogs[cog].__doc__}\n"
 
 
-      
+
       embed  = discord.Embed(
         title = "ChadBot Help",
-        description = f"These are all the command categories!\n Type {command_prefix}[category] to get the list of commands from each category",
+        description = f"These are all the command categories!\n Type {command_prefix}help[category] to get the list of commands from each category",
         color = discord.Color.blue()
         )
-        
+
       embed.add_field(
         name = "categories",
         value = cogs_desc,
         inline = False
       )
+      print(cogs_list)
       await ctx.send("", embed=embed)
 
 
 
-        
+
 
 
 def setup(client):
