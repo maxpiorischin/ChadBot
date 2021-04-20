@@ -4,14 +4,14 @@ from replit import db
 
 
 class Youtube(commands.Cog):
-    """Bot Information"""
+    """Youtube Commands"""
 
     def __init__(self, client):
         self.client = client
 
     # commands
 
-    @commands.command()
+    @commands.command(aliases = ["yt"])
     async def youtube(self, ctx):
         await ctx.send("Youtube Command, work in progress")
 

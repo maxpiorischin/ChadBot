@@ -8,7 +8,7 @@ class General(commands.Cog):
         self.client = client
 
     #commands
-    @commands.command()
+    @commands.command(aliases = ['hi'])
     async def hello(self, ctx):
         await ctx.send("Hello, I am Chad")
 

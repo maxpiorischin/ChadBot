@@ -12,9 +12,10 @@ class About(commands.Cog):
     # commands
     @commands.command()
     async def info(self, ctx):
-        await ctx.send("``` I'm a bot created by xxsuka#7765\n Server count: {} ```".format(len(self.client.guilds)))
+        command_prefix = self.client.command_prefix(self.client, ctx.message)
+        await ctx.send(f"``` I'm a bot created by xxsuka#7765\n Server count: {len(self.client.guilds)}\n use {command_prefix}help to get help on the different bot categories and commands! ```")
 
-    @commands.command()
+    @commands.command(aliases = ['chad'])
     @commands.has_permissions(embed_links=True)
     async def help(self, ctx, query=None):
         command_prefix = self.client.command_prefix(self.client, ctx.message)
@@ -42,9 +43,14 @@ class About(commands.Cog):
         else:
             if query.capitalize() in cogs_list:
                 cog_commands = self.client.get_cog(query.capitalize()).get_commands()
-                print("hello")
                 for com in cog_commands:
-                    commands_desc += f"{command_prefix}{com} - Aliases: {com.aliases}\n"
+                  aliases_desc = ""
+                  for alias in com.aliases:
+                    aliases_desc += alias
+                  if aliases_desc == "":
+                    commands_desc += f"{command_prefix}{com}\n"
+                  else:
+                    commands_desc += f"{command_prefix}{com} - Aliases: {aliases_desc}\n"
                 embed = discord.Embed(
                     title="ChadBot Help",
                     description=f"These are all the commands for category {query}!\n",
