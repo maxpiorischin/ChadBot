@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random
 
-class GeneralText(commands.Cog):
+class General(commands.Cog):
     """General commands that respond with a message"""
     def __init__(self, client):
         self.client = client
@@ -25,5 +25,5 @@ class GeneralText(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(GeneralText(client))
+    client.add_cog(General(client))
 

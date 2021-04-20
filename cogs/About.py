@@ -18,7 +18,7 @@ class About(commands.Cog):
     @commands.has_permissions(embed_links=True)
     async def help(self, ctx, query=None):
         command_prefix = self.client.command_prefix(self.client, ctx.message)
-        cogs_list = [c for c in self.client.cogs]
+        cogs_list = [c.capitalize() for c in self.client.cogs]
         cogs_desc = ""
         commands_desc = ""
         private_cogs = ['Fortnut']
@@ -42,8 +42,9 @@ class About(commands.Cog):
         else:
             if query.capitalize() in cogs_list:
                 cog_commands = self.client.get_cog(query.capitalize()).get_commands()
+                print("hello")
                 for com in cog_commands:
-                    commands_desc += f"`{com}`"
+                    commands_desc += f"{command_prefix}{com}\n"
                 embed = discord.Embed(
                     title="ChadBot Help",
                     description=f"These are all the commands for category {query}!\n",

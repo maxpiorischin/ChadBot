@@ -18,6 +18,22 @@ class Fortnut(commands.Cog):
         else:
             print("someone else trying to use fortnut")
 
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def logi(self, ctx):
+      if ctx.message.guild.id == self.server_id:
+        await ctx.send("https://media.tenor.com/images/1fc51a108537b70975aa749bab7f3935/tenor.gif")
+      else:
+        print("someone else trying to use fortnut")
+
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def washed(self, ctx):
+      if ctx.message.guild.id == self.server_id:
+        await ctx.send("https://thumbs.gfycat.com/EverySevereAtlanticridleyturtle-size_restricted.gif")
+      else:
+        print("someone else trying to use fortnut")
+
 
 
 

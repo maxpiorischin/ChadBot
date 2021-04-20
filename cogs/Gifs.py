@@ -12,6 +12,7 @@ class Gifs(commands.Cog):
     @commands.command()
     @commands.has_permissions(embed_links=True)
     async def gifs(self, ctx):
+        """ Lists gifs options """
         message = ""
         for gif in self.gifs_list:
             message += gif + "  "

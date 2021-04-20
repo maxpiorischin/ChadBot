@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 from replit import db
 
-class BotSettings(commands.Cog):
+class Settings(commands.Cog):
     """ Bot Settings, including prefix changing"""
     def __init__(self, client):
         self.client = client
@@ -42,4 +42,4 @@ class BotSettings(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(BotSettings(client))
+    client.add_cog(Settings(client))
