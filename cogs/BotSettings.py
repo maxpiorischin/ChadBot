@@ -4,7 +4,7 @@ import random
 from replit import db
 
 class BotSettings(commands.Cog):
-    """ Bot Settings such as prefixes """
+    """ Bot Settings, including prefix changing"""
     def __init__(self, client):
         self.client = client
 

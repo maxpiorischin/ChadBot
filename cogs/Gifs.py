@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 
 class Gifs(commands.Cog):
-    """ Gifs commands """
+    """ Gif commands """
     def __init__(self, client):
         self.client = client
         self.gifs_list = ["vibecat", "ridecat", "trumpetcat", "rainbowroach"]

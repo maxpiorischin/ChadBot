@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 
 class GeneralText(commands.Cog):
-    """ General text commands, such as .hello, .sheesh, .pp"""
+    """General commands that respond with a message"""
     def __init__(self, client):
         self.client = client
 
