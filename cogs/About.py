@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import random
 
 class About(commands.Cog):
     """ Gives info about the bot information"""
