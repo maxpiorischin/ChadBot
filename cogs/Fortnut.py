@@ -38,7 +38,7 @@ class Fortnut(commands.Cog):
     @commands.has_permissions(embed_links=True)
     async def kiwi(self, ctx):
         if ctx.message.guild.id == self.server_id:
-            await ctx.send("https://pngimg.com/uploads/kiwi/kiwi_PNG4030.pngWW")
+            await ctx.send("https://pngimg.com/uploads/kiwi/kiwi_PNG4030.png")
         else:
             print("someone else trying to use fortnut")
 

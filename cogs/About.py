@@ -31,7 +31,7 @@ class About(commands.Cog):
 
             embed = discord.Embed(
                 title="ChadBot Help",
-                description=f"These are all the command categories!\n Type {command_prefix}help[category] to get the list of commands from each category",
+                description=f"These are all the command categories!\n Type {command_prefix}help [category] to get the list of commands from each category",
                 color=discord.Color.blue()
             )
 
