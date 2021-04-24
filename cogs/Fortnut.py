@@ -46,7 +46,15 @@ class Fortnut(commands.Cog):
     @commands.has_permissions(embed_links=True)
     async def washed(self, ctx):
         if ctx.message.guild.id == self.server_id:
-            await ctx.send("https://cdn.discordapp.com/attachments/491423048751382548/834229981117677579/wp2523652.png")
+            await ctx.send("https://cdn.discordapp.com/attachments/453664765605314561/835365199900966972/beef-patty-side_Cut-Out.png")
+        else:
+            print("someone else trying to use fortnut")\
+
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def suka(self, ctx):
+        if ctx.message.guild.id == self.server_id:
+            await ctx.send("https://cdn.discordapp.com/attachments/833549338373521441/835366167081517066/MS5CAkN.png")
         else:
             print("someone else trying to use fortnut")
 

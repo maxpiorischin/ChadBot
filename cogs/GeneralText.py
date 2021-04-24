@@ -23,6 +23,11 @@ class General(commands.Cog):
         x = "=" * random.randrange(2, 40)
         await ctx.send(message_author + "'s pp length:  8" + x + "D")
 
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def fart(self, ctx):
+        await ctx.send("https://tenor.com/view/among-us-fart-poop-shit-fart-gif-18914562")
+
 
 def setup(client):
     client.add_cog(General(client))
