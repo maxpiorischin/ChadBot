@@ -24,7 +24,7 @@ class General(commands.Cog):
         await ctx.send(message_author + "'s pp length:  8" + x + "D")
 
     @commands.command()
-    @commands.has_permissions(embed_links=True)
+    @commands.has_permissions(embed_links=True) #funny gif
     async def fart(self, ctx):
         await ctx.send("https://tenor.com/view/among-us-fart-poop-shit-fart-gif-18914562")
 

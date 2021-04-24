@@ -60,7 +60,5 @@ class Fortnut(commands.Cog):
 
 
 
-
-
 def setup(client):
     client.add_cog(Fortnut(client))
