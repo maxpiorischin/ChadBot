@@ -6,8 +6,9 @@ import os
 token = os.getenv("CHAD_BOT_TOKEN")
 # Change only the no_category default string
 help_command = commands.DefaultHelpCommand(no_category = 'ModifyExtensions')
-#invite https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=67488832&scope=bot
 
+#invite https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=67488832&scope=bot
+#Developed By Maxim Piorischin, github.com/maxpiorischin
 
 
 # gets the prefix from database
