@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from ..modules import ytVideoGrabber
 from replit import db
 
 
@@ -12,8 +13,12 @@ class Youtube(commands.Cog):
     # commands
 
     @commands.command(aliases = ["yt"])
-    async def youtube(self, ctx):
-        await ctx.send("Youtube Command, work in progress")
+    async def youtube(self, ctx, message):
+        if type(message) == str:
+            link = ytVideoGrabber.videograbber(message)
+            await ctx.send(link)
+        else:
+            await ctx.send("error")
 
 
 
