@@ -1,7 +1,9 @@
 import discord
 from discord.ext import commands
-from ..modules import ytVideoGrabber
+import sys
 from replit import db
+sys.path.append("..")
+from modules import ytVideoGrabber
 
 
 class Youtube(commands.Cog):

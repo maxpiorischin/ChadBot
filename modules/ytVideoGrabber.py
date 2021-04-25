@@ -12,6 +12,3 @@ def videograbber(searchterm):
     request = urllib.request.urlopen(final_url)
     video_ids = re.findall(r"watch\?v=(\S{11})", request.read().decode())
     return videolinkcreator(video_ids[0])
-
-
-print(videograbber('hi'))
