@@ -15,8 +15,8 @@ class Youtube(commands.Cog):
     # commands
 
     @commands.command(aliases = ["yt"])
-    async def youtube(self, ctx, *args):
-        search_term = ' '.join(args)
+    async def youtube(self, ctx, *search):
+        search_term = '+'.join(search)
         print("searching: " +search_term)
         link = ytVideoGrabber.videograbber(search_term)
         await ctx.send(link)

@@ -45,12 +45,15 @@ class About(commands.Cog):
                 cog_commands = self.client.get_cog(query.capitalize()).get_commands()
                 for com in cog_commands:
                   aliases_desc = ""
+                  com_desc = com.name
+                  for param in com.clean_params:
+                    com_desc += f" <{param}>"
                   for alias in com.aliases:
                     aliases_desc += alias
                   if aliases_desc == "":
-                    commands_desc += f"{command_prefix}{com}\n"
+                    commands_desc += f"{command_prefix}{com_desc}\n"
                   else:
-                    commands_desc += f"{command_prefix}{com} - Aliases: {aliases_desc}\n"
+                    commands_desc += f"{command_prefix}{com_desc} - Aliases: {aliases_desc}\n"
                 embed = discord.Embed(
                     title="ChadBot Help",
                     description=f"These are all the commands for category {query}!\n",
