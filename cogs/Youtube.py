@@ -15,12 +15,11 @@ class Youtube(commands.Cog):
     # commands
 
     @commands.command(aliases = ["yt"])
-    async def youtube(self, ctx, message):
-        if type(message) == str:
-            link = ytVideoGrabber.videograbber(message)
-            await ctx.send(link)
-        else:
-            await ctx.send("error")
+    async def youtube(self, ctx, *args):
+        search_term = ' '.join(args)
+        print("searching: " +search_term)
+        link = ytVideoGrabber.videograbber(search_term)
+        await ctx.send(link)
 
 
 
