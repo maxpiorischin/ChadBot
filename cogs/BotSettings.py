@@ -31,7 +31,7 @@ class Settings(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def changeprefix(self, ctx, prefix):
+    async def changeprefix(self, ctx, prefix = '.'):
 
         db[str(ctx.guild.id)] = prefix
 
