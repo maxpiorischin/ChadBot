@@ -1,7 +1,8 @@
 .idea
 __pycache__
 .replit
-.lock
-.toml
+poetry.lock
+pyproject.toml
 data
 venv
+ffmpeg
