@@ -22,6 +22,8 @@ class Settings(commands.Cog):
         if general and general.permissions_for(guild.me).send_messages:
             await general.send(f"``` Hello {guild.name} ! \n I am Chad and you could use .help for a list of my commands! ```")
 
+        print(f"Joined Guild {guild.name} - {guild.id}")
+
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
 
