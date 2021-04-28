@@ -1,20 +1,23 @@
 import discord
 from discord.ext import commands
-from replit import db
+import pymongo
+from pymongo import MongoClient
 import os
 
 token = os.getenv("CHAD_BOT_TOKEN")
+cluster = MongoClient(os.getenv("MONGODB_CONNECTION"))
+db = cluster["Chad"]
+prefixes = db["Prefixes"]
 # Change only the no_category default string
 help_command = commands.DefaultHelpCommand(no_category = 'ModifyExtensions')
 
 #invite https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=8&scope=bot
 #Developed By Maxim Piorischin, github.com/maxpiorischin
 
-
 # gets the prefix from database
 def get_prefix(client, message):
-
-    return db[str(message.guild.id)]
+    post = prefixes.find_one({"_id": str(message.guild.id)})
+    return post["prefix"]
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 import sys
-from replit import db
 sys.path.append("..")
 from modules import ytVideoGrabber
 

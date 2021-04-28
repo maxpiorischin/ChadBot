@@ -1,22 +1,30 @@
 import discord
 from discord.ext import commands
 import random
-from replit import db
+import pymongo
+from pymongo import MongoClient
+import os
+#from replit import db
 
 class Settings(commands.Cog):
     """ Bot Settings, including prefix changing"""
     def __init__(self, client):
         self.client = client
+        self.cluster = MongoClient(os.getenv("MONGODB_CONNECTION"))
+        self.db = self.cluster["Chad"]
+        self.prefixes = self.db["Prefixes"]
 
     # gets the prefix from database
     def get_prefix(self, client, message):
-      return db[str(message.guild.id)]
+        post = self.prefixes.find_one({"_id": str(message.guild.id)})
+        return post["prefix"]
 
     #events
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
 
-        db[str(guild.id)] = "."
+        post = {"_id": str(guild.id), "prefix": "."}
+        self.prefixes.insert_one(post)
 
         general = guild.text_channels[0]
         if general and general.permissions_for(guild.me).send_messages:
@@ -27,7 +35,7 @@ class Settings(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
 
-        del db[str(guild.id)]
+        self.prefixes.delete_one({"_id": str(guild.id)})
 
     #commands
 
@@ -35,7 +43,7 @@ class Settings(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def changeprefix(self, ctx, prefix = '.'):
 
-        db[str(ctx.guild.id)] = prefix
+        self.prefixes.update_one({"_id": str(ctx.message.guild.id)}, {"$set": {"prefix" : prefix}})
 
         message = f"Prefix changed to {prefix}"
         print(message)
