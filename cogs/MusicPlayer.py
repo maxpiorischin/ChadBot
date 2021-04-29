@@ -68,5 +68,6 @@ class Musicplayer(commands.Cog):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
 
-"""def setup(client):
-    client.add_cog(Musicplayer(client)) """
+def setup(client):
+    #client.add_cog(Musicplayer(client))
+    return
