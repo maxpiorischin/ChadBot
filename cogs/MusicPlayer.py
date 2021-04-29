@@ -1,9 +1,12 @@
 import discord
 from discord.ext import commands
 import sys
+import os
+import asyncio
 
 sys.path.append("..")
 from modules import ytVideoGrabber
+import youtube_dl
 
 
 class Musicplayer(commands.Cog):
@@ -18,46 +21,52 @@ class Musicplayer(commands.Cog):
     async def play(self, ctx, *search):
         search_term = '+'.join(search)
         link = ytVideoGrabber.videograbber(search_term)
-        voiceChannel = ctx.message.author.voice.voice_channel
-        voice = discord.utils.get(self.client.voice_client, guild=ctx.guild)
-        if not voice.is_connected():
-            await voiceChannel.connect()
+        voiceChannel = ctx.message.author.voice.channel
+        await voiceChannel.connect()
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
 
-        print("playing " + search_term)
-        await ctx.send(link)
-
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([link])
+        for file in os.listdir("./"):
+            if file.endswith(".mp3"):
+                voice.play(discord.FFmpegPCMAudio(file))
+                os.remove("./" + file)
     @commands.command()
     async def leave(self, ctx):
-        voice = discord.utils.get(self.client.voice_client, guild=ctx.guild)
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_connected():
             await voice.disconnect()
         else:
-            await ctx.send("I'm not In a Voice Channel!")
+            await ctx.send("The bot is not connected to a voice channel.")
 
     @commands.command()
     async def pause(self, ctx):
-        voice = discord.utils.get(self.client.voice_client, guild=ctx.guild)
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.pause()
         else:
-            await ctx.send("Currently nothing is playing")
+            await ctx.send("Currently no audio is playing.")
 
     @commands.command()
     async def resume(self, ctx):
-        voice = discord.utils.get(self.client.voice_client, guild=ctx.guild)
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_paused():
             voice.resume()
         else:
-            await ctx.send("Audio already playing")
+            await ctx.send("The audio is not paused.")
 
     @commands.command()
     async def stop(self, ctx):
-        voice = discord.utils.get(self.client.voice_client, guild=ctx.guild)
-        if voice.is_playing():
-            await voice.stop()
-        else:
-            await ctx.send("I'm not playing anything!")
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
+        voice.stop()
 
-
-def setup(client):
-    client.add_cog(Musicplayer(client))
+"""def setup(client):
+    client.add_cog(Musicplayer(client)) """

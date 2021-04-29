@@ -12,6 +12,7 @@ prefixes = db["Prefixes"]
 help_command = commands.DefaultHelpCommand(no_category = 'ModifyExtensions')
 
 #invite https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=8&scope=bot
+#non admin https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=70380608&scope=bot
 #Developed By Maxim Piorischin, github.com/maxpiorischin
 
 # gets the prefix from database
