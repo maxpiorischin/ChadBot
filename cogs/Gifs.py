@@ -42,6 +42,20 @@ class Gifs(commands.Cog):
     async def rainbowroach(self, ctx):
         await ctx.send("https://cdn.discordapp.com/emojis/833211453346807858.gif?v=1")
 
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def sedan(self,ctx):
+      await ctx.send("https://tenor.com/view/suicide-sedan-oh-no-car-hearse-gif-16536143")
+
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def fubuki(self,ctx):
+      await ctx.send("https://tenor.com/view/fubuki-hellish-blizzard-one-punch-man-gif-19744192")
+
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def baka(self,ctx):
+      await ctx.send("https://tenor.com/view/baka-mangobaka-bakamango-mangobae-emfrizzle-gif-20783222")
 
 def setup(client):
     client.add_cog(Gifs(client))
