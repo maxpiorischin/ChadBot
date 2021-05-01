@@ -17,9 +17,11 @@ help_command = commands.DefaultHelpCommand(no_category = 'ModifyExtensions')
 
 # gets the prefix from database
 def get_prefix(client, message):
-    post = prefixes.find_one({"_id": str(message.guild.id)})
-    return post["prefix"]
-
+    prefix = "."
+    if message.guild is not None:
+        post = prefixes.find_one({"_id": str(message.guild.id)})
+        prefix = post["prefix"]
+    return prefix
 
 if __name__ == '__main__':
     client = commands.Bot(command_prefix=get_prefix, help_command = help_command)
