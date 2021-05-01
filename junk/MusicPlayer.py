@@ -6,7 +6,6 @@ import asyncio
 
 sys.path.append("..")
 from modules import ytVideoGrabber
-import youtube_dl
 
 
 class Musicplayer(commands.Cog):
