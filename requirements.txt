@@ -1,0 +1,5 @@
+discord
+discord.py
+pyMongo
+dnspython
+urllib3
