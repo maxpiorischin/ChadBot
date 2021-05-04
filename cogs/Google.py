@@ -5,23 +5,22 @@ sys.path.append("..")
 from modules import LinkGrabber
 
 
-class Youtube(commands.Cog):
-    """Youtube Commands"""
+class Google(commands.Cog):
+    """Google Commands"""
 
     def __init__(self, client):
         self.client = client
 
     # commands
 
-    @commands.command(aliases = ["yt"])
-    async def youtube(self, ctx, *search):
+    @commands.command(aliases = ["pic", "imagesearch"])
+    async def img(self, ctx, *search):
         search_term = '+'.join(search)
         print("searching: " +search_term)
-        link = LinkGrabber.videograbber(search_term)
+        link = LinkGrabber.imagegrabber(search_term)
         await ctx.send(link)
 
 
 
 def setup(client):
-    client.add_cog(Youtube(client))
-
+    client.add_cog(Google(client))

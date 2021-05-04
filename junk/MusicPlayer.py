@@ -5,7 +5,7 @@ import os
 import asyncio
 
 sys.path.append("..")
-from modules import ytVideoGrabber
+from modules import LinkGrabber
 
 
 class Musicplayer(commands.Cog):
@@ -19,7 +19,7 @@ class Musicplayer(commands.Cog):
     @commands.command()
     async def play(self, ctx, *search):
         search_term = '+'.join(search)
-        link = ytVideoGrabber.videograbber(search_term)
+        link = LinkGrabber.videograbber(search_term)
         voiceChannel = ctx.message.author.voice.channel
         await voiceChannel.connect()
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
