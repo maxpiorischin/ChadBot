@@ -28,5 +28,3 @@ def imagegrabber(searchterm):
     imgs = [img['src'] for img in html.find_all('img')]
     #print(imgs[1])
     return imgs[1]
-
-
