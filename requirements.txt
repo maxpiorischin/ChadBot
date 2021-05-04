@@ -3,3 +3,4 @@ discord.py
 pyMongo
 dnspython
 urllib3
+bs4
