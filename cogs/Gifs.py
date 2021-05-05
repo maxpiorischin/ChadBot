@@ -57,5 +57,11 @@ class Gifs(commands.Cog):
     async def baka(self,ctx):
       await ctx.send("https://tenor.com/view/baka-mangobaka-bakamango-mangobae-emfrizzle-gif-20783222")
 
+    @commands.command()
+    @commands.has_permissions(embed_links=True)
+    async def sedan(self, ctx):
+        await ctx.send("https://tenor.com/view/suicide-sedan-oh-no-car-hearse-gif-16536143")
+        await ctx.send("dababy moment")
+
 def setup(client):
     client.add_cog(Gifs(client))

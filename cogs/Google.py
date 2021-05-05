@@ -25,7 +25,7 @@ class Google(commands.Cog):
 
     @commands.command(aliases=["pic", "imagesearch"])
     async def img(self, ctx, *search):
-        message = await ctx.send("loading...")
+        message = await ctx.send("loading image...")
         driver = webdriver.Chrome(executable_path=os.getenv('CHROME_EXECUTABLE_PATH'), options=option)
         search_term = '+'.join(search)
         print("searching: " + search_term)
