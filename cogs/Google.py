@@ -36,7 +36,7 @@ class Google(commands.Cog):
         await message.edit(content = link)
         driver.quit()
 
-    @commands.command(aliases=["smallpic", "spic"])
+    @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
         search_term = '+'.join(search)
         print("searching: " + search_term)
