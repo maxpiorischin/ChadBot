@@ -40,14 +40,16 @@ class Settings(commands.Cog):
     #commands
 
     @commands.command()
-    @commands.has_permissions(administrator=True)
+    @commands.has_permissions()
     async def changeprefix(self, ctx, prefix = '.'):
+        if ctx.message.author.server_permissions.administrator:
+            self.prefixes.update_one({"_id": str(ctx.message.guild.id)}, {"$set": {"prefix" : prefix}})
 
-        self.prefixes.update_one({"_id": str(ctx.message.guild.id)}, {"$set": {"prefix" : prefix}})
-
-        message = f"Prefix changed to {prefix}"
-        print(message)
-        await ctx.send(message)
+            message = f"Prefix changed to {prefix}"
+            print(message)
+            await ctx.send(message)
+        else:
+            await ctx.send("Only Admin can use this command!")
     
 
 
