@@ -42,7 +42,7 @@ class Settings(commands.Cog):
     @commands.command()
     @commands.has_permissions()
     async def changeprefix(self, ctx, prefix = '.'):
-        if ctx.message.author.server_permissions.administrator:
+        if ctx.message.author.guild_permissions.administrator:
             self.prefixes.update_one({"_id": str(ctx.message.guild.id)}, {"$set": {"prefix" : prefix}})
 
             message = f"Prefix changed to {prefix}"
