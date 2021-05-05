@@ -47,11 +47,11 @@ def imagegrabber(searchterm, driver):
     return imges[0]
 
 def smallimagegrabber(searchterm):
-    final_url = google_images_url + searchterm
+    final_url = google_images_url + searchterm +google_images_url_end
     print(final_url)
-    soup = get_soup(final_url, REQUEST_HEADER)
-    imgs = [img['src'] for img in soup.find_all('img')]
-    #print(imgs[1])
+    html = get_soup(final_url, REQUEST_HEADER)
+    imgs = [img['src'] for img in html.find_all('img')]
+    # print(imgs[1])
     return imgs[1]
 
 def googlesearch(searchterm):
