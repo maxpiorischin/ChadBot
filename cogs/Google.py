@@ -36,11 +36,20 @@ class Google(commands.Cog):
         await message.edit(content = link)
         driver.quit()
 
+    @commands.command(aliases=["smallpic", "spic"])
+    async def smallimg(self, ctx, *search):
+        search_term = '+'.join(search)
+        print("searching: " + search_term)
+        link = LinkGrabber.smallimagegrabber(search_term)
+        await ctx.send(link)
+
     @commands.command(aliases=["google", "find"])
     async def search(self, ctx, *search):
         search_term = ' '.join(search)
         link = LinkGrabber.googlesearch(search_term)
         await ctx.send(link)
+
+
 
 
 def setup(client):
