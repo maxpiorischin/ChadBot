@@ -2,7 +2,16 @@ import discord
 from discord.ext import commands
 import sys
 from selenium import webdriver
-driver = webdriver.Chrome()
+import os
+option = webdriver.ChromeOptions()
+
+# You will need to specify the binary location for Heroku
+option.binary_location = os.getenv('GOOGLE_CHROME_BIN')
+
+option.add_argument("--headless")
+option.add_argument('--disable-gpu')
+option.add_argument('--no-sandbox')
+driver = webdriver.Chrome(executable_path=os.getenv('CHROME_EXECUTABLE_PATH'), options=option)
 
 sys.path.append("..")
 from modules import LinkGrabber
