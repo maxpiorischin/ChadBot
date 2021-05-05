@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import sys
+
 sys.path.append("..")
 from modules import LinkGrabber
 
@@ -13,13 +14,18 @@ class Google(commands.Cog):
 
     # commands
 
-    @commands.command(aliases = ["pic", "imagesearch"])
+    @commands.command(aliases=["pic", "imagesearch"])
     async def img(self, ctx, *search):
         search_term = '+'.join(search)
-        print("searching: " +search_term)
+        print("searching: " + search_term)
         link = LinkGrabber.imagegrabber(search_term)
         await ctx.send(link)
 
+    @commands.command(aliases=["google", "find"])
+    async def search(self, ctx, *search):
+        search_term = ' '.join(search)
+        link = LinkGrabber.search(search_term)
+        await ctx.send(link)
 
 
 def setup(client):
