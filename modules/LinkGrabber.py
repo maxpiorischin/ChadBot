@@ -35,3 +35,5 @@ def imagegrabber(searchterm):
 def googlesearch(searchterm):
     result = search(searchterm, num_results=3)
     return result[0]
+
+print(googlesearch("wiki"))

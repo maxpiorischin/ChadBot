@@ -24,7 +24,7 @@ class Google(commands.Cog):
     @commands.command(aliases=["google", "find"])
     async def search(self, ctx, *search):
         search_term = ' '.join(search)
-        link = LinkGrabber.search(search_term)
+        link = LinkGrabber.googlesearch(search_term)
         await ctx.send(link)
 
 
