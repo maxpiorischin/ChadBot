@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import sys
+from selenium import webdriver
+driver = webdriver.Chrome()
 
 sys.path.append("..")
 from modules import LinkGrabber
@@ -18,7 +20,7 @@ class Google(commands.Cog):
     async def img(self, ctx, *search):
         search_term = '+'.join(search)
         print("searching: " + search_term)
-        link = LinkGrabber.imagegrabber(search_term)
+        link = LinkGrabber.imagegrabber(search_term, driver)
         await ctx.send(link)
 
     @commands.command(aliases=["google", "find"])

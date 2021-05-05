@@ -5,3 +5,4 @@ dnspython
 urllib3
 bs4
 googlesearch-python
+selenium
