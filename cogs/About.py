@@ -48,7 +48,7 @@ class About(commands.Cog):
                   for param in com.clean_params:
                     com_desc += f" <{param}>"
                   for alias in com.aliases:
-                    aliases_desc += alias
+                    aliases_desc += alias + " "
                   if aliases_desc == "":
                     commands_desc += f"{command_prefix}{com_desc}\n"
                   else:
