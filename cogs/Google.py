@@ -33,8 +33,8 @@ class Google(commands.Cog):
         search_term = '+'.join(search_comma_numberlessthan11)
         last_val = search_term[len(search_term.rstrip('0123456789')):]
         if last_val.isdigit():
-            if (search_term.endswith(",+" + last_val) or search_term.endswith("," + last_val)) and 0 < int(last_val) <= 10:
-                search_term = search_term[:-3]
+            if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
+                search_term = search_term[:-(len(last_val) + 2)]
                 print("searching: " + search_term)
                 link = LinkGrabber.imagegrabber(search_term, driver, int(last_val))
                 for i in link:
