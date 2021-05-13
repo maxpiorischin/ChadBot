@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
-import random
+import random, sys
+sys.path.append("..")
+from modules import Games
 
 class General(commands.Cog):
     """General commands that respond with a message"""
@@ -27,6 +29,16 @@ class General(commands.Cog):
     @commands.has_permissions(embed_links=True) #funny gif
     async def fart(self, ctx):
         await ctx.send("https://tenor.com/view/among-us-fart-poop-shit-fart-gif-18914562")
+
+    @commands.command(aliases = ['8ball', 'question'])
+    @commands.has_permissions(embed_links=True)  # funny gif
+    async def _8ball(self, ctx, *search):
+        msg = ' '.join(search)
+        response = Games.response(ctx.message)
+        await ctx.send(response)
+        print(response)
+
+
 
 
 def setup(client):

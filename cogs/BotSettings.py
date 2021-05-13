@@ -4,7 +4,6 @@ import random
 import pymongo
 from pymongo import MongoClient
 import os
-#from replit import db
 
 class Settings(commands.Cog):
     """ Bot Settings, including prefix changing"""
