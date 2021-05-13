@@ -17,3 +17,5 @@ def response(message):
     else:
         index = random.randint(0, len(responses_list) - 1)
         return responses_list[index]
+
+print(response("is frankie gay"))

@@ -34,7 +34,7 @@ class General(commands.Cog):
     @commands.has_permissions(embed_links=True)  # funny gif
     async def _8ball(self, ctx, *search):
         msg = ' '.join(search)
-        response = Games.response(ctx.message)
+        response = Games.response(msg)
         await ctx.send(response)
         print(response)
 
