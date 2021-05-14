@@ -7,4 +7,4 @@ bs4
 googlesearch-python
 selenium
 google_images_search
-windows-curses
+windows-curses==2.2.0
