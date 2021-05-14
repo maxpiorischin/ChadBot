@@ -50,7 +50,7 @@ def imagegrabber(searchterm, driver, num):
     driver.quit()
     return imges
 
-def apiimagegrabber(searchterm, num):
+def googleapiimagegrabber(searchterm, num): # LIMITED QUERIES, HUGE RATE LIMIT
     _search_params = {
         'q': searchterm,
         'num': num,
@@ -60,6 +60,7 @@ def apiimagegrabber(searchterm, num):
     for obj in gis.results():
         links.append(obj.url)
     gis._search_result = []
+    print(links)
     return links
 
 def smallimagegrabber(searchterm):
@@ -74,4 +75,4 @@ def googlesearch(searchterm):
     result = search(searchterm, num_results=3)
     return result[0]
 
-apiimagegrabber("hi", 3)
+googleapiimagegrabber("hi", 5)
