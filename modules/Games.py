@@ -5,7 +5,6 @@ negative_responses = ['No', 'Never', 'No Chance', '0%', "I don't know"]
 responses_list = positive_responses + negative_responses
 pep_words = ['frankie', 'pep']
 gay_words = ['gay', 'homo', 'homosexual']  # this is just a joke with my friends, he is actually gay, he liked this
-print(responses_list)
 
 
 def response(message):
@@ -17,5 +16,3 @@ def response(message):
     else:
         index = random.randint(0, len(responses_list) - 1)
         return responses_list[index]
-
-print(response("is frankie gay"))

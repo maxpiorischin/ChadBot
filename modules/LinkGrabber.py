@@ -3,9 +3,11 @@ from urllib.request import Request, urlopen
 import re
 from bs4 import BeautifulSoup as Soup
 from googlesearch import search
+from google_images_search import GoogleImagesSearch
 from selenium import webdriver
 import os
 
+gis = GoogleImagesSearch('AIzaSyBVXQwjZJSvsbL3saqb2FKOIB6oTQUuEDI', 'b07614d3ada679580')
 ytsearch_url = "https://www.youtube.com/results?search_query="
 video_url = "https://www.youtube.com/watch?v="
 google_images_url = "https://www.google.co.in/search?q="
@@ -47,6 +49,17 @@ def imagegrabber(searchterm, driver, num):
                 break
     driver.quit()
     return imges
+
+def apiimagegrabber(searchterm, num):
+    _search_params = {
+        'q': searchterm,
+        'num': num,
+    }
+    gis.search(search_params=_search_params)
+    links = []
+    for obj in gis.results():
+        links.append(obj.url)
+    return links
 
 def smallimagegrabber(searchterm):
     final_url = google_images_url + searchterm +google_images_url_end
