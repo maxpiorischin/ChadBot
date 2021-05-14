@@ -35,13 +35,14 @@ class Google(commands.Cog):
         if last_val.isdigit():
             if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
                 search_term = search_term[:-(len(last_val) + 2)]
-                print("searching: " + search_term)
+                print("searching: " + search_term + " " + last_val)
                 # link = LinkGrabber.imagegrabber(search_term, driver, int(last_val))
                 link = LinkGrabber.apiimagegrabber(search_term, int(last_val))
-                print('hmm')
+                print(search_term, int(last_val), link)
                 for i in link:
                     await ctx.send(i)
                 return
+
         # link = LinkGrabber.imagegrabber(search_term, driver, 1)[0]
         link = LinkGrabber.apiimagegrabber(search_term, 1)[0]
         print("searching: " + search_term)
