@@ -47,7 +47,6 @@ def imagegrabber(searchterm, driver, num):
             num -=1
             if num == 0:
                 break
-    driver.quit()
     return imges
 
 def googleapiimagegrabber(searchterm, num): # LIMITED QUERIES, HUGE RATE LIMIT
@@ -74,5 +73,3 @@ def smallimagegrabber(searchterm):
 def googlesearch(searchterm):
     result = search(searchterm, num_results=3)
     return result[0]
-
-googleapiimagegrabber("hi", 5)
