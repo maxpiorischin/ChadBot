@@ -38,13 +38,14 @@ class Google(commands.Cog):
                 print("searching: " + search_term)
                 # link = LinkGrabber.imagegrabber(search_term, driver, int(last_val))
                 link = LinkGrabber.apiimagegrabber(search_term, int(last_val))
+                print('hmm')
                 for i in link:
                     await ctx.send(i)
-        else:
-            # link = LinkGrabber.imagegrabber(search_term, driver, 1)[0]
-            link = LinkGrabber.apiimagegrabber(search_term, 1)[0]
-            print("searching: " + search_term)
-            await message.edit(content=link)
+                return
+        # link = LinkGrabber.imagegrabber(search_term, driver, 1)[0]
+        link = LinkGrabber.apiimagegrabber(search_term, 1)[0]
+        print("searching: " + search_term)
+        await message.edit(content=link)
         # driver.quit()
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
