@@ -7,7 +7,7 @@ from google_images_search import GoogleImagesSearch
 from selenium import webdriver
 import os
 
-gis = GoogleImagesSearch(os.getenv('google_api'), os.getenv("google_cx"))
+gis = GoogleImagesSearch(os.getenv('google_api'), os.getenv("google_cx"), validate_images=False)
 ytsearch_url = "https://www.youtube.com/results?search_query="
 video_url = "https://www.youtube.com/watch?v="
 google_images_url = "https://www.google.co.in/search?q="
@@ -59,7 +59,7 @@ def apiimagegrabber(searchterm, num):
     links = []
     for obj in gis.results():
         links.append(obj.url)
-    print(links)
+    gis._search_result = []
     return links
 
 def smallimagegrabber(searchterm):
