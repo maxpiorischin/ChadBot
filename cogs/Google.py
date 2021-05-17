@@ -25,40 +25,50 @@ class Google(commands.Cog):
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
     @commands.command(aliases=["pic", "imagesearch"])
     async def img(self, ctx, *search_comma_numberlessthan11):
-        if search_comma_numberlessthan11 == None:
-            ctx.send("Please add an input!")
-            return
-        message = await ctx.send("loading image...")
-        search_term = '+'.join(search_comma_numberlessthan11)
-        last_val = search_term[len(search_term.rstrip('0123456789')):]
-        if last_val.isdigit():
-            if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
-                search_term = search_term[:-(len(last_val) + 2)]
-                print("searching: " + search_term + " " + last_val)
-                link = LinkGrabber.imagegrabber(search_term, self.driver, int(last_val))
-                #link = LinkGrabber.googleapiimagegrabber(search_term, int(last_val))
-                print(search_term, int(last_val), link)
-                for i in link:
-                    await ctx.send(i)
+        try:
+            if search_comma_numberlessthan11 == None:
+                ctx.send("Please add an input!")
                 return
+            message = await ctx.send("loading image...")
+            search_term = '+'.join(search_comma_numberlessthan11)
+            last_val = search_term[len(search_term.rstrip('0123456789')):]
+            if last_val.isdigit():
+                if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
+                    search_term = search_term[:-(len(last_val) + 2)]
+                    print("searching: " + search_term + " " + last_val)
+                    link = LinkGrabber.imagegrabber(search_term, self.driver, int(last_val))
+                    #link = LinkGrabber.googleapiimagegrabber(search_term, int(last_val))
+                    print(search_term, int(last_val), link)
+                    for i in link:
+                        await ctx.send(i)
+                    return
 
-        link = LinkGrabber.imagegrabber(search_term, self.driver, 1)[0]
-        #link = LinkGrabber.googleapiimagegrabber(search_term, 1)[0]
-        print("searching: " + search_term)
-        await message.edit(content=link)
+            link = LinkGrabber.imagegrabber(search_term, self.driver, 1)[0]
+            #link = LinkGrabber.googleapiimagegrabber(search_term, 1)[0]
+            print("searching: " + search_term)
+            await message.edit(content=link)
+        except:
+            await ctx.send("No Result!")
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
-        search_term = '+'.join(search)
-        print("searching: " + search_term)
-        link = LinkGrabber.smallimagegrabber(search_term)
-        await ctx.send(link)
+        try:
+            search_term = '+'.join(search)
+            print("searching: " + search_term)
+            link = LinkGrabber.smallimagegrabber(search_term)
+            await ctx.send(link)
+        except:
+            await ctx.send("No Result!")
 
     @commands.command(aliases=["google", "find"])
     async def search(self, ctx, *search):
-        search_term = ' '.join(search)
-        link = LinkGrabber.googlesearch(search_term)
-        await ctx.send(link)
+        try:
+            search_term = ' '.join(search)
+            link = LinkGrabber.googlesearch(search_term)
+            await ctx.send(link)
+        except:
+            await ctx.send("No Result!")
+
 
 
 def setup(client):

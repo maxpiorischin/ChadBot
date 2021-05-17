@@ -11,7 +11,7 @@ class Servermanagement(commands.Cog):
     @commands.has_permissions(manage_messages = True)
     async def purge(self, ctx, amount = 5):
       try:
-        await ctx.channel.purge(limit = amount)
+        await ctx.channel.purge(limit = amount + 1)
       except:
         await ctx.send("Bot or user Manage Message permission not granted!")
 
