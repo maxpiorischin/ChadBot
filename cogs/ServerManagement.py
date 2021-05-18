@@ -13,7 +13,7 @@ class Servermanagement(commands.Cog):
       try:
         await ctx.channel.purge(limit = amount + 1)
       except:
-        await ctx.send("Bot or user Manage Message permission not granted!")
+        await ctx.send("Bot permission not granted!")
 
 
 def setup(client):
