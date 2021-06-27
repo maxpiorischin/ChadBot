@@ -91,5 +91,5 @@ class Othercommands(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(OtherCommands(client))
+    client.add_cog(Othercommands(client))
 
