@@ -79,5 +79,3 @@ def defingrabber(searchterm):
     final_url = urban_dict_url + searchterm
     soup = get_soup(final_url, REQUEST_HEADER)
     return soup.find("div",attrs={"class":"meaning"}).text # definition
-
-print(defingrabber("REEESKJDBSKJDBKABDSKJD"))
