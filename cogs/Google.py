@@ -76,14 +76,18 @@ class Google(commands.Cog):
             embed_search = ' '.join(search)
             print("searching definition for: ", search_term, "in ", ctx.guild.name)
             defin = LinkGrabber.defingrabber(search_term)
+            """ discord embed version
             embed = discord.Embed(
                 title=embed_search + " Definition:",
                 description=defin,
                 color=discord.Color.blue()
             )
             await ctx.send("", embed = embed)
+            """
+            await ctx.send(defin)
         except:
             await ctx.send("No Result!")
+
 
 
 def setup(client):
