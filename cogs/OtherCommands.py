@@ -4,8 +4,8 @@ import random, sys
 sys.path.append("..")
 from modules import Games
 
-class OtherCommands(commands.Cog):
-    """General commands that respond with a message"""
+class Othercommands(commands.Cog):
+    """Other Useful Commands"""
     def __init__(self, client):
         self.client = client
 
