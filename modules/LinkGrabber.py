@@ -13,6 +13,7 @@ video_url = "https://www.youtube.com/watch?v="
 google_images_url = "https://www.google.co.in/search?q="
 google_images_url_end = "&source=lnms&tbm=isch"
 google_url = "https://www.google.ca/search?q="
+urban_dict_url = "https://www.urbandictionary.com/define.php?term="
 
 extensions = { "jpg", "jpeg", "png", "gif" }
 
@@ -73,3 +74,10 @@ def smallimagegrabber(searchterm):
 def googlesearch(searchterm):
     result = search(searchterm, num_results=3)
     return result[0]
+
+def defingrabber(searchterm):
+    final_url = urban_dict_url + searchterm
+    soup = get_soup(final_url, REQUEST_HEADER)
+    return soup.find("div",attrs={"class":"meaning"}).text # definition
+
+print(defingrabber("REEESKJDBSKJDBKABDSKJD"))

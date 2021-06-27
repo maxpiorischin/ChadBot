@@ -35,7 +35,7 @@ class Google(commands.Cog):
             if last_val.isdigit():
                 if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
                     search_term = search_term[:-(len(last_val) + 2)]
-                    print("searching: " + search_term + " " + last_val)
+                    print("searching: " + search_term + " " + last_val, "in ", ctx.guild.name)
                     link = LinkGrabber.imagegrabber(search_term, self.driver, int(last_val))
                     #link = LinkGrabber.googleapiimagegrabber(search_term, int(last_val))
                     print(search_term, int(last_val), link)
@@ -54,7 +54,7 @@ class Google(commands.Cog):
     async def smallimg(self, ctx, *search):
         try:
             search_term = '+'.join(search)
-            print("searching: " + search_term)
+            print("searching: " + search_term, "in ", ctx.guild.name)
             link = LinkGrabber.smallimagegrabber(search_term)
             await ctx.send(link)
         except:
@@ -69,6 +69,15 @@ class Google(commands.Cog):
         except:
             await ctx.send("No Result!")
 
+    @commands.command()
+    async def define(self, ctx, *search):
+        try:
+            search_term = '%20'.join(search)
+            print("searching definition for: ", search_term, "in ", ctx.guild.name)
+            defin = LinkGrabber.defingrabber(search_term)
+            await ctx.send(defin)
+        except:
+            await ctx.send("No Result!")
 
 
 def setup(client):
