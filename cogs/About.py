@@ -14,6 +14,15 @@ class About(commands.Cog):
         command_prefix = self.client.command_prefix(self.client, ctx.message)
         await ctx.send(f"``` I'm a bot created by xxsuka#7765\n Server count: {len(self.client.guilds)}\n use {command_prefix}help to get help on the different bot categories and commands! ```")
 
+    @commands.command(aliases=['invite'])
+    async def inv(self, ctx):
+        embed = discord.Embed(
+            title="ChadBot Invite",
+            description="Invite me to your server! https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=67226688&scope=bot",
+            color=discord.Color.blue()
+        )
+        await ctx.send("", embed = embed)
+
     @commands.command(aliases = ['chad'])
     @commands.has_permissions(embed_links=True)
     async def help(self, ctx, query=None):
