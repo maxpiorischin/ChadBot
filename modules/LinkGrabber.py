@@ -23,7 +23,7 @@ REQUEST_HEADER = {
 
 async def get_soup(url, header):
     async with aiohttp.request('GET', url, headers=header) as resp:
-        text = await resp.read()
+        text = await resp.text()
 
     return Soup(text, 'html.parser')
 
