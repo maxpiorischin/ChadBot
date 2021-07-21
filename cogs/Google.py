@@ -75,7 +75,7 @@ class Google(commands.Cog):
             search_term = '%20'.join(search)
             embed_search = ' '.join(search)
             print("searching definition for: ", search_term, "in ", ctx.guild.name)
-            defin = LinkGrabber.defingrabber(search_term)
+            defin = await LinkGrabber.defingrabber(search_term)
             """ discord embed version
             embed = discord.Embed(
                 title=embed_search + " Definition:",
