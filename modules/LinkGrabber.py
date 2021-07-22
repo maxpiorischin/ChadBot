@@ -85,6 +85,6 @@ def googlesearch(searchterm):
 async def defingrabber(searchterm):
     print("defingrabber reached")
     final_url = urban_dict_url + searchterm
-    soup = asyncio.run(await get_soup(final_url, REQUEST_HEADER))
+    soup = asyncio.run(get_soup(final_url, REQUEST_HEADER))
     print("end of defingrabber reached")
     return soup.find("div",attrs={"class":"meaning"}).text # definition
