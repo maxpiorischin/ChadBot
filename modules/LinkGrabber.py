@@ -22,13 +22,11 @@ REQUEST_HEADER = {
 
 
 async def get_soup(url, header):
-    print("get func reached")
     session = aiohttp.ClientSession()
     async with session.get(url,
                            headers=header) as resp:
         text = await resp.text()
     await session.close()
-    print("end of get reached")
     return Soup(text, 'html.parser')
 
 
@@ -75,7 +73,6 @@ async def smallimagegrabber(searchterm):
     print(final_url)
     html = await get_soup(final_url, REQUEST_HEADER)
     imgs = [img['src'] for img in html.find_all('img')]
-    # print(imgs[1])
     return imgs[1]
 
 def googlesearch(searchterm):
@@ -83,8 +80,6 @@ def googlesearch(searchterm):
     return result[0]
 
 async def defingrabber(searchterm):
-    print("defingrabber reached")
     final_url = urban_dict_url + searchterm
     soup = await get_soup(final_url, REQUEST_HEADER)
-    print("end of defingrabber reached")
     return soup.find("div",attrs={"class":"meaning"}).text # definition

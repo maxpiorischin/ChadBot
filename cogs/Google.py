@@ -55,7 +55,7 @@ class Google(commands.Cog):
         try:
             search_term = '+'.join(search)
             print("searching: " + search_term, "in ", ctx.guild.name)
-            link = LinkGrabber.smallimagegrabber(search_term)
+            link = await LinkGrabber.smallimagegrabber(search_term)
             await ctx.send(link)
         except:
             await ctx.send("No Result!")
