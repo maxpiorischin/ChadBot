@@ -73,7 +73,7 @@ def googleapiimagegrabber(searchterm, num): # LIMITED QUERIES, HUGE RATE LIMIT
 def smallimagegrabber(searchterm):
     final_url = google_images_url + searchterm +google_images_url_end
     print(final_url)
-    html = asyncio.run(get_soup(final_url, REQUEST_HEADER))
+    html = asyncio.run(await get_soup(final_url, REQUEST_HEADER))
     imgs = [img['src'] for img in html.find_all('img')]
     # print(imgs[1])
     return imgs[1]
@@ -85,6 +85,6 @@ def googlesearch(searchterm):
 async def defingrabber(searchterm):
     print("defingrabber reached")
     final_url = urban_dict_url + searchterm
-    soup = asyncio.run(get_soup(final_url, REQUEST_HEADER))
+    soup = await get_soup(final_url, REQUEST_HEADER)
     print("end of defingrabber reached")
     return soup.find("div",attrs={"class":"meaning"}).text # definition
