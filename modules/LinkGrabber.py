@@ -70,10 +70,10 @@ def googleapiimagegrabber(searchterm, num): # LIMITED QUERIES, HUGE RATE LIMIT
     print(links)
     return links
 
-def smallimagegrabber(searchterm):
+async def smallimagegrabber(searchterm):
     final_url = google_images_url + searchterm +google_images_url_end
     print(final_url)
-    html = asyncio.run(await get_soup(final_url, REQUEST_HEADER))
+    html = await get_soup(final_url, REQUEST_HEADER)
     imgs = [img['src'] for img in html.find_all('img')]
     # print(imgs[1])
     return imgs[1]
