@@ -22,9 +22,13 @@ REQUEST_HEADER = {
 
 
 async def get_soup(url, header):
-    async with aiohttp.request('GET', url, headers=header) as resp:
+    print("get func reached")
+    session = aiohttp.ClientSession()
+    async with session.get(url,
+                           headers=header) as resp:
         text = await resp.text()
-
+    await session.close()
+    print("end of get reached")
     return Soup(text, 'html.parser')
 
 
@@ -79,6 +83,8 @@ def googlesearch(searchterm):
     return result[0]
 
 async def defingrabber(searchterm):
+    print("defingrabber reached")
     final_url = urban_dict_url + searchterm
     soup = asyncio.run(await get_soup(final_url, REQUEST_HEADER))
+    print("end of defingrabber reached")
     return soup.find("div",attrs={"class":"meaning"}).text # definition
