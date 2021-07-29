@@ -41,7 +41,7 @@ def videograbber(searchterm):
     return linkcreator(video_url, video_ids[0])
 
 
-def imagegrabber(searchterm, driver, num):
+async def imagegrabber(searchterm, driver, num):
 
     url = google_images_url + searchterm + google_images_url_end
     driver.get(url)
@@ -50,9 +50,9 @@ def imagegrabber(searchterm, driver, num):
     for i in html:
         if i.startswith('http') and i.split('"')[0].split('.')[-1] in extensions:
             imges.append(i.split('"')[0])
-            num -=1
             if num == 0:
                 break
+            num -=1
     return imges
 
 def googleapiimagegrabber(searchterm, num): # LIMITED QUERIES, HUGE RATE LIMIT

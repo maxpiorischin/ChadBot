@@ -36,14 +36,16 @@ class Google(commands.Cog):
                 if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
                     search_term = search_term[:-(len(last_val) + 2)]
                     print("searching: " + search_term + " " + last_val, "in ", ctx.guild.name)
-                    link = LinkGrabber.imagegrabber(search_term, self.driver, int(last_val))
+                    link = await LinkGrabber.imagegrabber(search_term, self.driver, int(last_val) - 1)
                     #link = LinkGrabber.googleapiimagegrabber(search_term, int(last_val))
                     print(search_term, int(last_val), link)
                     for i in link:
                         await ctx.send(i)
                     return
 
-            link = LinkGrabber.imagegrabber(search_term, self.driver, 1)[0]
+            link = await LinkGrabber.imagegrabber(search_term, self.driver, 1)
+            print(search_term, link)
+            link = link[0]
             #link = LinkGrabber.googleapiimagegrabber(search_term, 1)[0]
             print("searching: " + search_term)
             await message.edit(content=link)
