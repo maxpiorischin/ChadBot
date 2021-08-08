@@ -5,9 +5,8 @@ print(cluster)
 db = cluster["ChadStats"]
 commands = db["Commands"]
 
-"""
 post = { "_id": "img", "date": 2021, "content": "before stats", "user": "before stats" }
-for i in range(1000):
+for i in range(2800):
     commands.insert_one(post)
-"""
-print(commands.find_one())
+
+print("done")
