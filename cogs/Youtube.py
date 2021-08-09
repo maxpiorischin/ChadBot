@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import sys
 sys.path.append("..")
-from modules import LinkGrabber
+from modules import LinkGrabber, Mongo
 
 
 class Youtube(commands.Cog):
@@ -10,6 +10,7 @@ class Youtube(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.MongoWorker = Mongo.MongoWorker()
 
     # commands
 
@@ -19,6 +20,7 @@ class Youtube(commands.Cog):
         print("searching: " +search_term)
         link = LinkGrabber.videograbber(search_term)
         await ctx.send(link)
+        await self.MongoWorker.add_youtube("yt", search_term, ctx.message.author.name)
 
 
 

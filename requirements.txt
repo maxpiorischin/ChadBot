@@ -7,3 +7,4 @@ bs4
 googlesearch-python
 selenium
 google_images_search
+motor

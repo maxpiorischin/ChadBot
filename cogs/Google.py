@@ -3,6 +3,8 @@ from discord.ext import commands
 import sys
 from selenium import webdriver
 import os
+sys.path.append("..")
+from modules import Mongo
 
 option = webdriver.ChromeOptions()
 
@@ -20,6 +22,7 @@ class Google(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.driver = webdriver.Chrome(executable_path=os.getenv('CHROME_EXECUTABLE_PATH'), options=option)
+        self.MongoWorker = Mongo.MongoWorker()
 
     # commands
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
@@ -41,6 +44,7 @@ class Google(commands.Cog):
                     print(search_term, int(last_val), link)
                     for i in link:
                         await ctx.send(i)
+                    await self.MongoWorker.add_img(search_term, ctx.message.author.name)
                     return
 
             link = await LinkGrabber.imagegrabber(search_term, self.driver, 1)
@@ -49,8 +53,11 @@ class Google(commands.Cog):
             #link = LinkGrabber.googleapiimagegrabber(search_term, 1)[0]
             print("searching: " + search_term)
             await message.edit(content=link)
+            await self.MongoWorker.add_img(search_term, ctx.message.author.name)
         except:
             await ctx.send("No Result!")
+            search_term = '+'.join(search_comma_numberlessthan11)
+            await self.MongoWorker.add_img(search_term, ctx.message.author.name)
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
@@ -59,8 +66,11 @@ class Google(commands.Cog):
             print("searching: " + search_term, "in ", ctx.guild.name)
             link = await LinkGrabber.smallimagegrabber(search_term)
             await ctx.send(link)
+            await self.MongoWorker.add_img(search_term, ctx.message.author.name)
         except:
             await ctx.send("No Result!")
+            search_term = '+'.join(search)
+            await self.MongoWorker.add_img(search_term, ctx.message.author.name)
 
     @commands.command(aliases=["google", "find"])
     async def search(self, ctx, *search):
@@ -68,8 +78,11 @@ class Google(commands.Cog):
             search_term = ' '.join(search)
             link = LinkGrabber.googlesearch(search_term)
             await ctx.send(link)
+            await self.MongoWorker.add_web("search", search_term, ctx.message.author.name)
         except:
             await ctx.send("No Result!")
+            search_term = ' '.join(search)
+            await self.MongoWorker.add_web("search", search_term, ctx.message.author.name)
 
     @commands.command()
     async def define(self, ctx, *search):
@@ -87,8 +100,11 @@ class Google(commands.Cog):
             await ctx.send("", embed = embed)
             """
             await ctx.send(defin)
+            await self.MongoWorker.add_web("define", search_term, ctx.message.author.name)
         except:
             await ctx.send("No Result!")
+            search_term = '%20'.join(search)
+            await self.MongoWorker.add_web("define", search_term, ctx.message.author.name)
 
 
 

@@ -3,27 +3,26 @@ from discord.ext import commands
 import random
 import pymongo
 from pymongo import MongoClient
-import os
+import os, sys
+sys.path.append("..")
+from modules import Mongo
 
 class Settings(commands.Cog):
     """ Bot Settings, including prefix changing"""
     def __init__(self, client):
         self.client = client
-        self.cluster = MongoClient(os.getenv("MONGODB_CONNECTION"))
-        self.db = self.cluster["Chad"]
-        self.prefixes = self.db["Prefixes"]
+        self.MongoWorker = Mongo.MongoWorker()
 
     # gets the prefix from database
-    def get_prefix(self, client, message):
-        post = self.prefixes.find_one({"_id": str(message.guild.id)})
-        return post["prefix"]
+    async def get_prefix(self, client, message):
+        prefix = await self.MongoWorker.get_prefix(message)
+        return prefix
 
     #events
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
 
-        post = {"_id": str(guild.id), "prefix": "."}
-        self.prefixes.insert_one(post)
+        await self.MongoWorker.add_prefix(guild.id, ".")
 
         general = guild.text_channels[0]
         if general and general.permissions_for(guild.me).send_messages:
@@ -34,7 +33,7 @@ class Settings(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
 
-        self.prefixes.delete_one({"_id": str(guild.id)})
+        await self.MongoWorker.del_prefix(guild.id)
 
     #commands
 
@@ -42,7 +41,7 @@ class Settings(commands.Cog):
     @commands.has_permissions()
     async def changeprefix(self, ctx, prefix = '.'):
         if ctx.message.author.guild_permissions.administrator:
-            self.prefixes.update_one({"_id": str(ctx.message.guild.id)}, {"$set": {"prefix" : prefix}})
+            await self.MongoWorker.update_prefix(ctx.message.guild.id, prefix)
 
             message = f"Prefix changed to {prefix}"
             print(message)
