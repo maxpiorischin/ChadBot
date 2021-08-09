@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import motor
 import motor.motor_asyncio
 import os, sys
-from datetime import date
+from datetime import date, datetime
 
 class MongoWorker:
     def __init__(self):
@@ -30,18 +30,18 @@ class MongoWorker:
         self.prefixes.update_one({"_id": str(id)}, {"$set": {"prefix": prefix}})
 
     async def add_img(self, content, user):
-        post = {"_id": str(date.today()), "command": "img", "content": content,
-                "user": user}
+        post = {"_id": datetime.now(), "command": "img", "content": content,
+                "user": user, "time" : str(date.today())}
         self.IMG.insert_one(post)
     async def add_misc(self, command, content, user):
-        post = {"_id": str(date.today()), "command": command,"content": content,
-                "user": user}
+        post = {"_id": datetime.now(), "command": command,"content": content,
+                "user": user, "time" : str(date.today())}
         self.Misc.insert_one(post)
     async def add_web(self, command, content, user):
-        post = {"_id": str(date.today()), "command": command, "content": content,
-                "user": user}
+        post = {"_id": datetime.now(), "command": command, "content": content,
+                "user": user, "time" : str(date.today())}
         self.WebSearch.insert_one(post)
     async def add_youtube(self, command, content, user):
-        post = {"_id": str(date.today()), "command": command, "content": content,
-                "user": user}
+        post = {"_id": datetime.now(), "command": command, "content": content,
+                "user": user, "time" : str(date.today())}
         self.Youtube.insert_one(post)
