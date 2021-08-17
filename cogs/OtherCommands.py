@@ -41,7 +41,7 @@ class Othercommands(commands.Cog):
         msg = ' '.join(search)
         response = Games.response(msg)
         await ctx.send(response)
-        await self.MongoWorker.add_misc("8ball", "8ball", ctx.message.author, ctx.message.guild)
+        await self.MongoWorker.add_misc("8ball", msg, ctx.message.author, ctx.message.guild)
 
     @commands.command()
     @commands.has_permissions(embed_links=True)
