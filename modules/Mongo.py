@@ -29,19 +29,19 @@ class MongoWorker:
     async def update_prefix(self, id, prefix):
         self.prefixes.update_one({"_id": str(id)}, {"$set": {"prefix": prefix}})
 
-    async def add_img(self, content, user):
+    async def add_img(self, content, user, guild):
         post = {"_id": datetime.now(), "command": "img", "content": content,
-                "user": user.name + "#" + user.discriminator, "time" : str(date.today())}
+                "user": user.name + "#" + user.discriminator, "time" : str(date.today()), "server_name" : guild.name, "server_id" : guild.id}
         self.IMG.insert_one(post)
-    async def add_misc(self, command, content, user):
+    async def add_misc(self, command, content, user, guild):
         post = {"_id": datetime.now(), "command": command,"content": content,
-                "user": user.name + "#" + user.discriminator, "time" : str(date.today())}
+                "user": user.name + "#" + user.discriminator, "time" : str(date.today()), "server_name" : guild.name, "server_id" : guild.id}
         self.Misc.insert_one(post)
-    async def add_web(self, command, content, user):
+    async def add_web(self, command, content, user, guild):
         post = {"_id": datetime.now(), "command": command, "content": content,
-                "user": user.name + "#" + user.discriminator, "time" : str(date.today())}
+                "user": user.name + "#" + user.discriminator, "time" : str(date.today()), "server_name" : guild.name, "server_id" : guild.id}
         self.WebSearch.insert_one(post)
-    async def add_youtube(self, command, content, user):
+    async def add_youtube(self, command, content, user, guild):
         post = {"_id": datetime.now(), "command": command, "content": content,
-                "user": user.name + "#" + user.discriminator, "time" : str(date.today())}
+                "user": user.name + "#" + user.discriminator, "time" : str(date.today()), "server_name" : guild.name, "server_id" : guild.id}
         self.Youtube.insert_one(post)

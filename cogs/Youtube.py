@@ -20,7 +20,7 @@ class Youtube(commands.Cog):
         print("searching: " +search_term)
         link = LinkGrabber.videograbber(search_term)
         await ctx.send(link)
-        await self.MongoWorker.add_youtube("yt", search_term, ctx.message.author)
+        await self.MongoWorker.add_youtube("yt", search_term, ctx.message.author, ctx.message.guild)
 
 
 
