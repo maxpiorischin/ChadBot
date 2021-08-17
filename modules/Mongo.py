@@ -9,7 +9,7 @@ class MongoWorker:
         self.cluster = motor.motor_asyncio.AsyncIOMotorClient(os.getenv("MONGODB_CONNECTION"))
         self.dbchad = self.cluster["Chad"]
         self.prefixes = self.dbchad["Prefixes"]
-        self.dbchadstats = self.cluster["ChadStatsNew"]
+        self.dbchadstats = self.cluster["ChadStatsLive"]
         self.IMG = self.dbchadstats["IMG"]
         self.Misc = self.dbchadstats["Misc"]
         self.WebSearch = self.dbchadstats["WebSearch"]
