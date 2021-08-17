@@ -24,9 +24,9 @@ class Othercommands(commands.Cog):
 
     @commands.command()
     async def pp(self, ctx):
-        message_author = ctx.message.author, ctx.message.guild
+        message_author = "@" + ctx.message.author.name + "#" + ctx.message.author.discriminator
         x = "=" * random.randrange(2, 40)
-        await ctx.send(message_author + "'s pp length:  8" + x + "D")
+        await ctx.send(message_author + " 's pp length:  8" + x + "D")
         await self.MongoWorker.add_misc("pp", "pp", ctx.message.author, ctx.message.guild)
 
     @commands.command()
