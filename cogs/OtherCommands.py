@@ -14,26 +14,26 @@ class Othercommands(commands.Cog):
     @commands.command(aliases = ['hi'])
     async def hello(self, ctx):
         await ctx.send("Hello, I am Chad")
-        await self.MongoWorker.add_misc("hello", "hello", ctx.message.author.name)
+        await self.MongoWorker.add_misc("hello", "hello", ctx.message.author)
 
     @commands.command()
     async def sheesh(self, ctx):
         x = "e" * random.randrange(2, 30)
         await ctx.send("sh" + x + "sh")
-        await self.MongoWorker.add_misc("sheesh", "sheesh", ctx.message.author.name)
+        await self.MongoWorker.add_misc("sheesh", "sheesh", ctx.message.author)
 
     @commands.command()
     async def pp(self, ctx):
-        message_author = ctx.message.author.name
+        message_author = ctx.message.author
         x = "=" * random.randrange(2, 40)
         await ctx.send(message_author + "'s pp length:  8" + x + "D")
-        await self.MongoWorker.add_misc("pp", "pp", ctx.message.author.name)
+        await self.MongoWorker.add_misc("pp", "pp", ctx.message.author)
 
     @commands.command()
     @commands.has_permissions(embed_links=True) #funny gif
     async def fart(self, ctx):
         await ctx.send("https://tenor.com/view/among-us-fart-poop-shit-fart-gif-18914562")
-        await self.MongoWorker.add_misc("fart", "fart", ctx.message.author.name)
+        await self.MongoWorker.add_misc("fart", "fart", ctx.message.author)
 
     @commands.command(aliases = ['8ball', 'question'])
     @commands.has_permissions(embed_links=True)  # funny gif
@@ -41,7 +41,7 @@ class Othercommands(commands.Cog):
         msg = ' '.join(search)
         response = Games.response(msg)
         await ctx.send(response)
-        await self.MongoWorker.add_misc("8ball", "8ball", ctx.message.author.name)
+        await self.MongoWorker.add_misc("8ball", "8ball", ctx.message.author)
 
     @commands.command()
     @commands.has_permissions(embed_links=True)
@@ -91,7 +91,7 @@ class Othercommands(commands.Cog):
             await ctx.channel.purge(limit=amount + 1)
         except:
             await ctx.send("Bot permission not granted!")
-        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author.name)
+        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author)
 
 
 

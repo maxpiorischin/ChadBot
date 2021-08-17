@@ -16,7 +16,7 @@ class About(commands.Cog):
     async def info(self, ctx):
         command_prefix = self.client.command_prefix(self.client, ctx.message)
         await ctx.send(f"``` I'm a bot created by xxsuka#7765\n Server count: {len(self.client.guilds)}\n use {command_prefix}help to get help on the different bot categories and commands! ```")
-        await self.MongoWorker.add_misc("info", "info", ctx.message.author.name)
+        await self.MongoWorker.add_misc("info", "info", ctx.message.author)
 
     @commands.command(aliases=['invite'])
     async def inv(self, ctx):
@@ -26,7 +26,7 @@ class About(commands.Cog):
             color=discord.Color.blue()
         )
         await ctx.send("", embed = embed)
-        await self.MongoWorker.add_misc("inv", "inv", ctx.message.author.name)
+        await self.MongoWorker.add_misc("inv", "inv", ctx.message.author)
 
     @commands.command(aliases = ['chad'])
     @commands.has_permissions(embed_links=True)
@@ -81,7 +81,7 @@ class About(commands.Cog):
             else:
                 await ctx.send("Category not available!")
         await ctx.send("", embed=embed)
-        await self.MongoWorker.add_misc("help", "help", ctx.message.author.name)
+        await self.MongoWorker.add_misc("help", "help", ctx.message.author)
 
 
 def setup(client):
