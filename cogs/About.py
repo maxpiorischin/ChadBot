@@ -78,6 +78,7 @@ class About(commands.Cog):
             else:
                 embed = tools.embed_creator("ERROR", "Category not available!", discord.Color.red())
                 await ctx.send("", embed = embed)
+                return
         await ctx.send("", embed=embed)
         await self.MongoWorker.add_misc("help", "help", ctx.message.author, ctx.message.guild)
 
