@@ -1,7 +1,7 @@
 import discord, sys
 from discord.ext import commands
 sys.path.append("..")
-from modules import Mongo
+from modules import Mongo, tools
 
 
 class About(commands.Cog):
@@ -15,16 +15,13 @@ class About(commands.Cog):
     @commands.command()
     async def info(self, ctx):
         command_prefix = self.client.command_prefix(self.client, ctx.message)
-        await ctx.send(f"``` I'm a bot created by xxsuka#7765\n Server count: {len(self.client.guilds)}\n use {command_prefix}help to get help on the different bot categories and commands! ```")
+        embed = tools.embed_creator("Chadbot info", f" I'm a bot created by xxsuka#7765\n Server count: {len(self.client.guilds)}\n use {command_prefix}help to get help on the different bot categories and commands!", discord.Color.blue())
+        await ctx.send("", embed = embed)
         await self.MongoWorker.add_misc("info", "info", ctx.message.author, ctx.message.guild)
 
     @commands.command(aliases=['invite'])
     async def inv(self, ctx):
-        embed = discord.Embed(
-            title="ChadBot Invite",
-            description="Invite me to your server! https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=67226688&scope=bot",
-            color=discord.Color.blue()
-        )
+        embed = tools.embed_creator("ChadBot Invite", "Invite me to your server! https://discord.com/api/oauth2/authorize?client_id=833176607496863804&permissions=67226688&scope=bot", discord.Color.blue())
         await ctx.send("", embed = embed)
         await self.MongoWorker.add_misc("inv", "inv", ctx.message.author, ctx.message.guild)
 
@@ -79,7 +76,8 @@ class About(commands.Cog):
                     inline=False
                 )
             else:
-                await ctx.send("Category not available!")
+                embed = tools.embed_creator("ERROR", "Category not available!", discord.Color.red())
+                await ctx.send("", embed = embed)
         await ctx.send("", embed=embed)
         await self.MongoWorker.add_misc("help", "help", ctx.message.author, ctx.message.guild)
 

@@ -5,7 +5,7 @@ import pymongo
 from pymongo import MongoClient
 import os, sys
 sys.path.append("..")
-from modules import Mongo
+from modules import Mongo, tools
 
 class Settings(commands.Cog):
     """ Bot Settings, including prefix changing"""
@@ -44,10 +44,11 @@ class Settings(commands.Cog):
             await self.MongoWorker.update_prefix(ctx.message.guild.id, prefix)
 
             message = f"Prefix changed to {prefix}"
-            print(message)
-            await ctx.send(message)
+            embed = tools.embed_creator("Settings", message, discord.Color.green())
+            await ctx.send("", embed = embed)
         else:
-            await ctx.send("Only Admin can use this command!")
+            embed = tools.embed_creator("ERROR", "Only Admins can use this command!", discord.Color.green())
+            await ctx.send("", embed = embed)
     
 
 

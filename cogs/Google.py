@@ -37,7 +37,7 @@ class Google(commands.Cog):
             last_val = search_term[len(search_term.rstrip('0123456789')):]
             if last_val.isdigit():
                 if int(last_val) > 10:
-                    embed = tools.embed_creator("Error", "Maximum of 10 Images!", discord.Color.blue())
+                    embed = tools.embed_creator("ERROR", "Maximum of 10 Images!", discord.Color.red())
                     await ctx.send("", embed = embed)
                     return
                 if (search_term.endswith(",+" + last_val)) and 0 < int(last_val) <= 10:
@@ -59,7 +59,8 @@ class Google(commands.Cog):
             await message.edit(content=link)
             await self.MongoWorker.add_img(search_term, ctx.message.author, ctx.message.guild)
         except:
-            await ctx.send("No Result!")
+            embed = tools.embed_creator("No Result!", "", discord.Color.blue())
+            await ctx.send("", embed = embed)
             search_term = '+'.join(search_comma_numberlessthan11)
             await self.MongoWorker.add_img(search_term, ctx.message.author, ctx.message.guild)
 
@@ -72,7 +73,8 @@ class Google(commands.Cog):
             await ctx.send(link)
             await self.MongoWorker.add_img(search_term, ctx.message.author, ctx.message.guild)
         except:
-            await ctx.send("No Result!")
+            embed = tools.embed_creator("No Result!", "", discord.Color.blue())
+            await ctx.send("", embed = embed)
             search_term = '+'.join(search)
             await self.MongoWorker.add_img(search_term, ctx.message.author, ctx.message.guild)
 
