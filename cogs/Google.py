@@ -76,7 +76,7 @@ class Google(commands.Cog):
     async def search(self, ctx, *search):
         try:
             search_term = ' '.join(search)
-            link = LinkGrabber.googlesearch(search_term)
+            link = await LinkGrabber.googlesearch(search_term)
             await ctx.send(link)
             await self.MongoWorker.add_web("search", search_term, ctx.message.author, ctx.message.guild)
         except:
