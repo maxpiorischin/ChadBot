@@ -35,7 +35,7 @@ class Reddit(commands.Cog):
             await ctx.send("", embed=embed)
             return
         if "," in search_term:
-            search_term = search_term[:-(len(last_val) + 2)]
+            search_term = search_term[:-(len(last_val) + 1)]
         print(search_term, last_val)
         try:
             subreddit = await self.reddit.subreddit(search_term)
