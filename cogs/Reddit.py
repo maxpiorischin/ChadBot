@@ -19,6 +19,7 @@ class Reddit(commands.Cog):
             client_secret=reddit_secr_id,
             user_agent=user_agent,
         )
+        self.redditlink = "https://www.reddit.com"
         self.MongoWorker = Mongo.MongoWorker()
 
 
@@ -42,9 +43,9 @@ class Reddit(commands.Cog):
             async for submission in subreddit.hot(limit=last_val):
                 if submission.over_18:
 
-                    embed = tools.embed_creator(submission.title + " NSFW", submission.permalink, discord.Color.red())
+                    embed = tools.embed_creator(submission.title + " NSFW", self.redditlink + submission.permalink, discord.Color.red())
                 else:
-                    embed = tools.embed_creator(submission.title, submission.permalink, discord.Color.orange())
+                    embed = tools.embed_creator(submission.title, self.redditlink + submission.permalink, discord.Color.orange())
                 await ctx.send("", embed = embed)
         except:
             embed = tools.embed_creator("ERROR", "Subreddit does not exist", discord.Color.red())
