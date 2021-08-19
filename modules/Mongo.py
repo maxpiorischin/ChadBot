@@ -14,6 +14,7 @@ class MongoWorker:
         self.Misc = self.dbchadstats["Misc"]
         self.WebSearch = self.dbchadstats["WebSearch"]
         self.Youtube = self.dbchadstats["Youtube"]
+        self.Reddit = self.dbchadstats["Reddit"]
 
     async def get_prefix(self, message):
         post = self.prefixes.find_one({"_id": str(message.guild.id)})
@@ -45,3 +46,7 @@ class MongoWorker:
         post = {"_id": datetime.now(), "command": command, "content": content,
                 "user": user.name + "#" + user.discriminator, "user_id" : user.id, "time" : str(date.today()), "server_name" : guild.name, "server_id" : guild.id}
         self.Youtube.insert_one(post)
+    async def add_reddit(self, command, content, user, guild):
+        post = {"_id": datetime.now(), "command": command, "content": content,
+                "user": user.name + "#" + user.discriminator, "user_id" : user.id, "time" : str(date.today()), "server_name" : guild.name, "server_id" : guild.id}
+        self.Reddit.insert_one(post)
