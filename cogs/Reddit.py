@@ -35,12 +35,12 @@ class Reddit(commands.Cog):
             await ctx.send("", embed=embed)
             return
         if "," in search_term:
-            search_term = search_term[:-(len(last_val) + 1)]
+            search_term = search_term[:-(len(last_val))]
         print(search_term, last_val)
         try:
             subreddit = await self.reddit.subreddit(search_term)
             async for submission in subreddit.hot(limit=last_val):
-                await ctx.send(submission.title)
+                await ctx.send(submission.url)
         except:
             embed = tools.embed_creator("ERROR", "Subreddit does not exist", discord.Color.red())
             await ctx.send("", embed = embed)
