@@ -43,9 +43,9 @@ class Reddit(commands.Cog):
             async for submission in subreddit.hot(limit=last_val):
                 if submission.over_18:
 
-                    embed = tools.embed_creator(submission.title + " NSFW", submission.url + "\n by:" + submission.author + "\n at:" + submission.created_utc, discord.Color.red())
+                    embed = tools.embed_creator(submission.title + " NSFW", submission.url + "\n by:" + submission.author, discord.Color.red())
                 else:
-                    embed = tools.embed_creator(submission.title, submission.url + "\n by:" + submission.author + "\n at:" + submission.created_utc, discord.Color.orange())
+                    embed = tools.embed_creator(submission.title, submission.url + "\n by:" + submission.author, discord.Color.orange())
                 await ctx.send("", embed = embed)
         except:
             embed = tools.embed_creator("ERROR", "Subreddit does not exist", discord.Color.red())
