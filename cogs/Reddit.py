@@ -30,13 +30,13 @@ class Reddit(commands.Cog):
         last_val = search_term[len(search_term.rstrip('0123456789')):]
         if not last_val.isdigit():
             last_val = 1
+        last_val = int(last_val)
         if int(last_val) > 10:
             embed = tools.embed_creator("ERROR", "Maximum of 10 Images!", discord.Color.red())
             await ctx.send("", embed=embed)
             return
         if "," in search_term:
-            search_term = search_term[:-(len(last_val))]
-        print(search_term, last_val)
+            search_term = search_term[:-(len(str(last_val)) + 1)]
         try:
             subreddit = await self.reddit.subreddit(search_term)
             async for submission in subreddit.hot(limit=last_val):
