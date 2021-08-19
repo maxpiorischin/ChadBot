@@ -41,11 +41,13 @@ class Reddit(commands.Cog):
         try:
             subreddit = await self.reddit.subreddit(search_term)
             async for submission in subreddit.hot(limit=last_val):
+                print("hmm")
                 if submission.over_18:
 
                     embed = tools.embed_creator(submission.title + " NSFW", submission.url, discord.Color.red())
                 else:
-                    embed = tools.embed_creator(submission.title, submission.url discord.Color.orange())
+                    embed = tools.embed_creator(submission.title, submission.url, discord.Color.orange())
+
                 await ctx.send("", embed = embed)
         except:
             embed = tools.embed_creator("ERROR", "Subreddit does not exist", discord.Color.red())
