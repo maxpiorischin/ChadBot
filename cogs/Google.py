@@ -36,7 +36,7 @@ class Google(commands.Cog):
             search_term = '+'.join(search_comma_numberlessthan11)
             last_val = search_term[len(search_term.rstrip('0123456789')):]
             if last_val.isdigit():
-                if int(last_val) > 10:
+                if int(last_val) > 10 and not "," in search_term:
                     embed = tools.embed_creator("ERROR", "Maximum of 10 Images!", discord.Color.red())
                     await ctx.send("", embed = embed)
                     return
