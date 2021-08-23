@@ -26,7 +26,7 @@ class Google(commands.Cog):
 
     # commands
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
-    @commands.command(aliases=["pic", "imagesearch"])
+    @commands.command(aliases=["pic", "image"])
     async def img(self, ctx, *search_comma_numberlessthan11):
         try:
             if search_comma_numberlessthan11 == None:
