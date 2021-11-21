@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import sys
 from selenium import webdriver
-import os
+import os, time
 sys.path.append("..")
 from modules import Mongo, tools
 
@@ -28,6 +28,7 @@ class Google(commands.Cog):
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
     @commands.command(aliases=["pic", "image"])
     async def img(self, ctx, *search_comma_numberlessthan11):
+        tic = time.perf_counter()
         try:
             if search_comma_numberlessthan11 == None:
                 ctx.send("Please add an input!")
@@ -63,6 +64,8 @@ class Google(commands.Cog):
             await ctx.send("", embed = embed)
             search_term = '+'.join(search_comma_numberlessthan11)
             await self.MongoWorker.add_img(search_term, ctx.message.author, ctx.message.guild)
+        toc = time.perf_counter
+        print(f"Time to search image: {toc-tic}")
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
