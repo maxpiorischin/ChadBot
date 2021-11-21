@@ -65,7 +65,7 @@ class Google(commands.Cog):
             await ctx.send("", embed = embed)
             search_term = '+'.join(search_comma_numberlessthan11)
             await self.MongoWorker.add_img(search_term, ctx.message.author, ctx.message.guild)
-        toc = perf_counter
+        toc = perf_counter()
         time = toc-tic
         print(f"Time to search image: {time}")
 
