@@ -58,6 +58,19 @@ class Fortnut(commands.Cog):
         else:
             print("someone else trying to use fortnut")
 
+    @commands.command()
+    async def hardpurge(self, ctx, amount=5):
+        try:
+            if ctx.message.author.id == 281621038771732481:
+                await ctx.channel.purge(limit=amount + 1)
+            else:
+                await ctx.send("Only Bot owner can use this command :)")
+        except:
+            await ctx.send("Bot permission not granted!")
+        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
+
+    
+
 
 
 def setup(client):
