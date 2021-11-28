@@ -91,7 +91,6 @@ class Othercommands(commands.Cog):
             await ctx.channel.purge(limit=amount + 1)
         except:
             await ctx.send("Bot permission not granted!")
-        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
 
 
 
