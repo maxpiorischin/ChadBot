@@ -67,7 +67,6 @@ class Fortnut(commands.Cog):
                 await ctx.send("Only Bot owner can use this command :)")
         except:
             await ctx.send("Bot permission not granted!")
-        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
 
     
 
