@@ -86,7 +86,7 @@ class Othercommands(commands.Cog):
 
     @commands.command()
     async def purge(self, ctx, amount=5):
-        if ctx.message.author.server_permissions.manage_messages:
+        if message.author.guild_permissions.manage_messages:
             try:
                 await ctx.channel.purge(limit=amount + 1)
             except:
