@@ -85,13 +85,24 @@ class Othercommands(commands.Cog):
         await ctx.send("dababy moment")
 
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, amount=5):
-        if message.author.guild_permissions.manage_messages:
-            try:
+        try:
+            await ctx.channel.purge(limit=amount + 1)
+        except:
+            await ctx.send("Bot permission not granted!")
+        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
+
+    @commands.command()
+    async def hardpurge(self, ctx, amount=5):
+        try:
+            if ctx.message.author.id == 281621038771732481:
                 await ctx.channel.purge(limit=amount + 1)
-            except:
-                await ctx.send("Bot permission not granted!")
-            await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
+            else:
+                await ctx.send("Only Bot owner can use this command :)")
+        except:
+            await ctx.send("Bot permission not granted!")
+        await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
 
 
 
