@@ -97,7 +97,10 @@ class Othercommands(commands.Cog):
     @commands.command()
     async def ban(self, ctx, user: discord.Member):
         await ctx.send(user)
-        await ctx.send(ctx.message.author.id)
+        await ctx.send(ctx.message.author)
+        await ctx.send(ctx.message.author.name)
+        await ctx.send(ctx.message.author.discriminator)
+        await ctx.send(ctx.message.author.email)
 
 
 
