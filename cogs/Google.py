@@ -39,6 +39,9 @@ class Google(commands.Cog):
                 color=discord.Color.red()
             )
             await ctx.send("", embed=embed)
+            return
+        zoc = perf_counter()
+        print("Time to do first check:" + str(zoc-tic))
         try:
             if search_comma_numberlessthan11 == None:
                 ctx.send("Please add an input!")
