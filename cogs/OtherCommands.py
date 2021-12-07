@@ -95,12 +95,75 @@ class Othercommands(commands.Cog):
         await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
 
     @commands.command()
-    async def ban(self, ctx, user: discord.Member):
-        await ctx.send(user)
-        await ctx.send(ctx.message.author)
-        await ctx.send(ctx.message.author.name)
-        await ctx.send(ctx.message.author.discriminator)
-        await ctx.send(ctx.message.author.email)
+    async def imgban(self, ctx, user: discord.Member):
+        try:
+            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
+                if user in BanList.banlist:
+                    embed = discord.Embed(
+                        title="Error!",
+                        description="User already banned!",
+                        color=discord.Color.red()
+                    )
+                    ctx.send("", embed=embed)
+                else:
+                    BanList.banlist.append(user)
+                    embed = discord.Embed(
+                        title="cya",
+                        description="Banned" + user.name,
+                        color=discord.Color.blue()
+                    )
+                    ctx.send("", embed=embed)
+            else:
+                embed = discord.Embed(
+                    title="Error",
+                    description="Only an Admin can ban a user!",
+                    color=discord.Color.red()
+                )
+                ctx.send("", embed=embed)
+
+        except:
+            embed = discord.Embed(
+                title="Error!",
+                description="Please Input a valid name!",
+                color=discord.Color.red()
+            )
+            await ctx.send("",embed=embed)
+        # Full only await ctx.send(user)
+        # Full : await ctx.send(ctx.message.author)
+
+    async def imgunban(self, ctx, user: discord.Member):
+        try:
+            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
+                if user in BanList.banlist:
+                    BanList.banlist.remove(user)
+                    embed = discord.Embed(
+                        title="Success",
+                        description="Unbanned",
+                        color=discord.Color.blue()
+                    )
+                    ctx.send("", embed=embed)
+                else:
+                    embed = discord.Embed(
+                        title="Error",
+                        description="User:" + user.name + " Is not banned",
+                        color=discord.Color.red()
+                    )
+                    ctx.send("", embed=embed)
+            else:
+                embed = discord.Embed(
+                    title="Error",
+                    description="Only an Admin can unban a user!",
+                    color=discord.Color.red()
+                )
+                ctx.send("", embed=embed)
+
+        except:
+            embed = discord.Embed(
+                title="Error!",
+                description="Please Input a valid name!",
+                color=discord.Color.red()
+            )
+            await ctx.send("",embed=embed)
 
 
 
