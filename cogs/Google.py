@@ -35,13 +35,11 @@ class Google(commands.Cog):
         if ctx.message.author in self.banlist:
             embed = discord.Embed(
                 title="Error!",
-                description="You're banned :)",
+                description="You're banned",
                 color=discord.Color.red()
             )
             await ctx.send("", embed=embed)
             return
-        zoc = perf_counter()
-        print("Time to do first check:" + str(zoc-tic))
         try:
             if search_comma_numberlessthan11 == None:
                 ctx.send("Please add an input!")

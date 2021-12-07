@@ -166,6 +166,10 @@ class Othercommands(commands.Cog):
             )
             await ctx.send("",embed=embed)
 
+    @commands.command()
+    async def bannedusers(self, ctx):
+        await ctx.send(BanList.banlist)
+
 
 
 
