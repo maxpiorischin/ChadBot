@@ -104,7 +104,7 @@ class Othercommands(commands.Cog):
                         description="User already banned!",
                         color=discord.Color.red()
                     )
-                    ctx.send("", embed=embed)
+                    await ctx.send("", embed=embed)
                 else:
                     BanList.banlist.append(user)
                     embed = discord.Embed(
@@ -112,14 +112,14 @@ class Othercommands(commands.Cog):
                         description="Banned" + user.name,
                         color=discord.Color.blue()
                     )
-                    ctx.send("", embed=embed)
+                    await ctx.send("", embed=embed)
             else:
                 embed = discord.Embed(
                     title="Error",
                     description="Only an Admin can ban a user!",
                     color=discord.Color.red()
                 )
-                ctx.send("", embed=embed)
+                await ctx.send("", embed=embed)
 
         except:
             embed = discord.Embed(
@@ -141,21 +141,21 @@ class Othercommands(commands.Cog):
                         description="Unbanned",
                         color=discord.Color.blue()
                     )
-                    ctx.send("", embed=embed)
+                    await ctx.send("", embed=embed)
                 else:
                     embed = discord.Embed(
                         title="Error",
                         description="User:" + user.name + " Is not banned",
                         color=discord.Color.red()
                     )
-                    ctx.send("", embed=embed)
+                    await ctx.send("", embed=embed)
             else:
                 embed = discord.Embed(
                     title="Error",
                     description="Only an Admin can unban a user!",
                     color=discord.Color.red()
                 )
-                ctx.send("", embed=embed)
+                await ctx.send("", embed=embed)
 
         except:
             embed = discord.Embed(
