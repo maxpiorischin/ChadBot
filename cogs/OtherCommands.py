@@ -3,6 +3,7 @@ from discord.ext import commands
 import random, sys
 sys.path.append("..")
 from modules import Games, Mongo
+from smalldata import BanList
 
 class Othercommands(commands.Cog):
     """Other Useful Commands"""
@@ -92,6 +93,14 @@ class Othercommands(commands.Cog):
         except:
             await ctx.send("Bot permission not granted!")
         await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
+
+    @commands.command()
+    async def ban(self, ctx, user: discord.Member):
+        try:
+            await ctx.send("Param:", user)
+            await ctx.send("Author", ctx.message.author.id)
+        except:
+            await ctx.send("Bot permission not granted!")
 
 
 

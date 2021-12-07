@@ -16,6 +16,7 @@ option.add_argument('--no-sandbox')
 
 sys.path.append("..")
 from modules import LinkGrabber
+from smalldata import BanList
 
 class Google(commands.Cog):
     """Google Commands"""
@@ -24,6 +25,7 @@ class Google(commands.Cog):
         self.client = client
         self.driver = webdriver.Chrome(executable_path=os.getenv('CHROME_EXECUTABLE_PATH'), options=option)
         self.MongoWorker = Mongo.MongoWorker()
+        self.banlist = BanList.banlist
 
     # commands
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
