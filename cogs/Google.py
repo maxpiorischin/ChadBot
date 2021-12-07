@@ -32,8 +32,13 @@ class Google(commands.Cog):
     @commands.command(aliases=["pic", "image"])
     async def img(self, ctx, *search_comma_numberlessthan11):
         tic = perf_counter()
-        print(ctx.message.author)
-        print(ctx.message.author.toString())
+        if ctx.message.author in self.banlist:
+            embed = discord.Embed(
+                title="Error!",
+                description="You're banned :)",
+                color=discord.Color.red()
+            )
+            await ctx.send("", embed=embed)
         try:
             if search_comma_numberlessthan11 == None:
                 ctx.send("Please add an input!")
