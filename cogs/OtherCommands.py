@@ -96,11 +96,8 @@ class Othercommands(commands.Cog):
 
     @commands.command()
     async def ban(self, ctx, user: discord.Member):
-        try:
-            await ctx.send("Param:", user)
-            await ctx.send("Author", ctx.message.author.id)
-        except:
-            await ctx.send("Bot permission not granted!")
+        await ctx.send(user)
+        await ctx.send(ctx.message.author.id)
 
 
 
