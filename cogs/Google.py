@@ -32,6 +32,8 @@ class Google(commands.Cog):
     @commands.command(aliases=["pic", "image"])
     async def img(self, ctx, *search_comma_numberlessthan11):
         tic = perf_counter()
+        print(ctx.message.author)
+        print(ctx.message.author.name)
         try:
             if search_comma_numberlessthan11 == None:
                 ctx.send("Please add an input!")

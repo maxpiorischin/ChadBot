@@ -109,7 +109,7 @@ class Othercommands(commands.Cog):
                     BanList.banlist.append(user)
                     embed = discord.Embed(
                         title="cya",
-                        description="Banned" + user.name,
+                        description="Banned " + user.name,
                         color=discord.Color.blue()
                     )
                     await ctx.send("", embed=embed)
@@ -131,6 +131,7 @@ class Othercommands(commands.Cog):
         # Full only await ctx.send(user)
         # Full : await ctx.send(ctx.message.author)
 
+    @commands.command()
     async def imgunban(self, ctx, user: discord.Member):
         try:
             if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
