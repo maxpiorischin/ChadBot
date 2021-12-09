@@ -94,12 +94,10 @@ class Othercommands(commands.Cog):
             await ctx.send("Bot permission not granted!")
         await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
 
-    @commands.command()
+    @commands.command(aliases = ['iban'])
     async def imgban(self, ctx, user: discord.Member):
-        print (ctx.message.author.guild_permissions.administrator)
-        print (ctx.message.author.guild_permissions)
         try:
-            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
+            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.kick_members:
                 if user in BanList.banlist:
                     embed = discord.Embed(
                         title="Error!",
@@ -133,10 +131,10 @@ class Othercommands(commands.Cog):
         # Full only await ctx.send(user)
         # Full : await ctx.send(ctx.message.author)
 
-    @commands.command()
+    @commands.command(aliases = ['iunban'])
     async def imgunban(self, ctx, user: discord.Member):
         try:
-            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
+            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.kick_members:
                 if user in BanList.banlist:
                     BanList.banlist.remove(user)
                     embed = discord.Embed(
@@ -167,6 +165,7 @@ class Othercommands(commands.Cog):
                 color=discord.Color.red()
             )
             await ctx.send("",embed=embed)
+
 
     @commands.command()
     async def bannedusers(self, ctx):
