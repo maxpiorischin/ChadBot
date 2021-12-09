@@ -86,7 +86,6 @@ class Othercommands(commands.Cog):
         await ctx.send("dababy moment")
 
     @commands.command()
-    @commands.is_owner()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, amount=5):
         try:
@@ -96,30 +95,36 @@ class Othercommands(commands.Cog):
         await self.MongoWorker.add_misc("purge", "purge", ctx.message.author, ctx.message.guild)
 
     @commands.command()
-    @commands.is_owner()
-    @commands.has_permissions(administrator=True)
     async def imgban(self, ctx, user: discord.Member):
         try:
-            if user in BanList.banlist:
-                embed = discord.Embed(
-                    title="Error!",
-                    description="User already banned!",
-                    color=discord.Color.red()
-                )
-                await ctx.send("", embed=embed)
+            if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
+                if user in BanList.banlist:
+                    embed = discord.Embed(
+                        title="Error!",
+                        description="User already banned!",
+                        color=discord.Color.red()
+                    )
+                    await ctx.send("", embed=embed)
+                else:
+                    BanList.banlist.append(user)
+                    embed = discord.Embed(
+                        title="cya",
+                        description="Banned " + user.name,
+                        color=discord.Color.blue()
+                    )
+                    await ctx.send("", embed=embed)
             else:
-                BanList.banlist.append(user)
                 embed = discord.Embed(
-                    title="cya",
-                    description="Banned " + user.name,
-                    color=discord.Color.blue()
+                    title="Error",
+                    description="Only an Admin can ban a user!",
+                    color=discord.Color.red()
                 )
                 await ctx.send("", embed=embed)
 
         except:
             embed = discord.Embed(
                 title="Error!",
-                description="Please Input a valid name or you're not admin!",
+                description="Please Input a valid name!",
                 color=discord.Color.red()
             )
             await ctx.send("",embed=embed)
