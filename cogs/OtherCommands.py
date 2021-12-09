@@ -96,6 +96,8 @@ class Othercommands(commands.Cog):
 
     @commands.command()
     async def imgban(self, ctx, user: discord.Member):
+        print("hmm" : ctx.message.author.guild_permissions.administrator)
+        print("perms" + ctx.message.author.guild_permissions)
         try:
             if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.administrator:
                 if user in BanList.banlist:
