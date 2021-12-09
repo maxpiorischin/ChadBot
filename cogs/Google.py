@@ -6,6 +6,7 @@ import os
 from time import perf_counter
 sys.path.append("..")
 from modules import Mongo, tools
+from urllib.parse import quote
 
 option = webdriver.ChromeOptions()
 
@@ -33,12 +34,14 @@ class Google(commands.Cog):
     async def img(self, ctx, *search_comma_numberlessthan11):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
-            embed = discord.Embed(
-                title="Error!",
-                description="You're banned",
-                color=discord.Color.red()
-            )
-            await ctx.send("", embed=embed)
+            msg = f"https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
+            await ctx.send(msg)
+            # embed = discord.Embed(
+            #     title="Error!",
+            #     description="You're banned",
+            #     color=discord.Color.red()
+            # )
+            # await ctx.send("", embed=embed)
             return
         try:
             if search_comma_numberlessthan11 == None:
