@@ -84,6 +84,16 @@ class Google(commands.Cog):
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
+        if ctx.message.author in self.banlist:
+            msg = f"https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
+            await ctx.send(msg)
+            # embed = discord.Embed(
+            #     title="Error!",
+            #     description="You're banned",
+            #     color=discord.Color.red()
+            # )
+            # await ctx.send("", embed=embed)
+            return
         try:
             search_term = '+'.join(search)
             print("searching: " + search_term, "in ", ctx.guild.name)
