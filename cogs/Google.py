@@ -78,15 +78,15 @@ class Google(commands.Cog):
         if len(links) == 0:
             try:
                 async with aiohttp.ClientSession() as session:
-                    resp = await session.get(google_search + search_term)
-                    links = await resp.json()
-
-                    self.link_cache[content] = [
-                        links,
-                        datetime.datetime.now().timestamp(),
-                    ]
-            except:
-                pass
+                    async with session.get(google_search + search_term) as resp:
+                        links = await resp.json()
+                        self.link_cache[content] = [
+                            links,
+                            datetime.datetime.now().timestamp(),
+                        ]
+            except Exception as e:
+                print("Fail to search")
+                raise e
 
         await self.MongoWorker.add_img(content, ctx.message.author, ctx.message.guild)
 
