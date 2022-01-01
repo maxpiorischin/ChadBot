@@ -59,7 +59,7 @@ class Google(commands.Cog):
         if "," in content:
             stuff = content.split(",")
             content = ",".join(stuff[:-1])
-            number = max(min(int(stuff[:-1]) if stuff[:-1].isdigit() else 1, 10), 1)
+            number = max(min(int(stuff[-1]) if stuff[-1].isdigit() else 1, 10), 1)
             
         search_term = quote(content)
 
