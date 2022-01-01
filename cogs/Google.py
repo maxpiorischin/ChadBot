@@ -102,7 +102,7 @@ class Google(commands.Cog):
             #     image_url=link, footer={"text": f"search term: {content}"}, color=invis
             # )
 
-    @commands.command(aliases=["pic", "image"])
+    @commands.command()
     async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
