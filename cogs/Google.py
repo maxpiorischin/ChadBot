@@ -98,12 +98,12 @@ class Google(commands.Cog):
             if i == number:
                 break
 
-            await ctx.reply(content=links.pop(), mention_author=False)
+            await ctx.reply(content=links.pop(0), mention_author=False)
             # await ctx.embed(
             #     image_url=link, footer={"text": f"search term: {content}"}, color=invis
             # )
 
-    @commands.command()
+    @commands.command(aliases=["oimg", "im"])
     async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
