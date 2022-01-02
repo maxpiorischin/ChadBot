@@ -5,6 +5,7 @@ from pymongo import MongoClient
 import os
 
 from modules.tools import quick_embed
+from modules.ahttp import HTTP
 
 token = os.getenv("CHAD_BOT_TOKEN")
 cluster = MongoClient(os.getenv("MONGODB_CONNECTION"))
@@ -38,6 +39,7 @@ if __name__ == "__main__":
 
     client = commands.Bot(command_prefix=get_prefix, help_command=help_command)
     client.remove_command("help")
+    client.ahttp = HTTP()
 
     @client.event
     async def on_ready():

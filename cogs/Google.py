@@ -44,6 +44,7 @@ class Google(commands.Cog):
 
     # commands
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
+
     @commands.command(aliases=["pic", "image"])
     async def img(
         self, ctx: commands.Context, *, content: commands.clean_content = None
@@ -59,46 +60,54 @@ class Google(commands.Cog):
         if "," in content:
             stuff = content.split(",")
             content = ",".join(stuff[:-1])
-            number = max(min(int(stuff[-1].strip()) if stuff[-1].strip().isdigit() else 1, 10), 1)
-            
+            number = max(
+                min(int(stuff[-1].strip()) if stuff[-1].strip().isdigit() else 1, 10), 1
+            )
+
         search_term = quote(content)
 
         print(f"searching: {content} | {number} \t in {ctx.guild.name}")
 
-        links = []
-        if content in self.link_cache:
-            c_links, timestamp = self.link_cache[content]
-            if len(c_links) == 0:
-                del self.link_cache[content]
-            else:
-                if (datetime.datetime.now().timestamp() - timestamp) < 3600:
-                    links = c_links
-                else:
-                    del self.link_cache[content]
+        links = self.link_cache.get(content, [])
+        # if content in self.link_cache:
+        #     c_links, timestamp = self.link_cache[content]
+        #     if len(c_links) == 0:
+        #         del self.link_cache[content]
+        #     else:
+        #         if (datetime.datetime.now().timestamp() - timestamp) < 3600:
+        #             links = c_links
+        #         else:
+        #             del self.link_cache[content]
 
         if len(links) == 0:
-            try:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(google_search + search_term) as resp:
-                        links = await resp.json()
-                        self.link_cache[content] = [
-                            links,
-                            datetime.datetime.now().timestamp(),
-                        ]
-            except Exception as e:
-                print("Fail to search")
-                raise e
+            j_links = await self.client.ahttp.get_json(google_search + search_term)
+            if j_links != {} and len(j_links) > 0:
+                links = j_links
+                self.link_cache[content] = links
+            # self.link_cache[content] = [
+            #     links,
+            #     datetime.datetime.now().timestamp(),
+            # ]
 
         await self.MongoWorker.add_img(content, ctx.message.author, ctx.message.guild)
 
         if len(links) == 0:
             return await ctx.embed(title="No Results Found!", color=invis)
 
-        for i in range(len(links)):
+        i = 0
+        sent = False
+        for link in links:
             if i == number:
                 break
 
-            await ctx.reply(content=links.pop(0), mention_author=False)
+            if await self.client.ahhtp.is_media(link):
+                i += 1
+                sent = True
+                await ctx.reply(content=link, mention_author=False)
+
+        if not sent:
+            return await ctx.embed(title="No Results Found!", color=invis)
+
             # await ctx.embed(
             #     image_url=link, footer={"text": f"search term: {content}"}, color=invis
             # )
