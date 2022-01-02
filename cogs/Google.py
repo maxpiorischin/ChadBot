@@ -68,13 +68,7 @@ class Google(commands.Cog):
         links = []
         if content in self.link_cache:
             c_links, timestamp = self.link_cache[content]
-            if len(c_links) == 0:
-                del self.link_cache[content]
-            else:
-                # if (datetime.datetime.now().timestamp() - timestamp) < 3600:
-                links = c_links
-                # else:
-                #     del self.link_cache[content]
+            links = c_links
 
         if len(links) == 0:
             try:
