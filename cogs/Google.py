@@ -100,7 +100,7 @@ class Google(commands.Cog):
             if i == number:
                 break
 
-            if await self.client.ahhtp.is_media(link):
+            if await self.client.ahttp.is_media(link):
                 i += 1
                 sent = True
                 await ctx.reply(content=link, mention_author=False)
