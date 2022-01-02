@@ -100,10 +100,10 @@ class Google(commands.Cog):
             if i == number:
                 break
 
-            if await self.client.ahttp.is_media(link):
-                i += 1
-                sent = True
-                await ctx.reply(content=link, mention_author=False)
+            # if await self.client.ahttp.is_media(link): THIS IS FOR MORE STRICT
+            i += 1
+            sent = True
+            await ctx.reply(content=link, mention_author=False)
 
         if not sent:
             return await ctx.embed(title="No Results Found!", color=invis)
