@@ -49,6 +49,7 @@ class Google(commands.Cog):
     async def img(
         self, ctx: commands.Context, *, content: commands.clean_content = None
     ):
+    tic = perf_counter()
         if ctx.message.author in self.banlist:
             msg = f"{get_fukt}&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
             return await ctx.embed(image_url=msg, color=invis)
@@ -110,7 +111,10 @@ class Google(commands.Cog):
 
             # await ctx.embed(
             #     image_url=link, footer={"text": f"search term: {content}"}, color=invis
-            # )
+            # )'
+        time = toc - tic
+        ctx.send(f"Time to search image with gurgle: {time}")
+        print(f"Time to search image with gurgle: {time}")
 
     @commands.command(aliases=["oimg", "im"])
     async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):
@@ -176,7 +180,8 @@ class Google(commands.Cog):
             )
         toc = perf_counter()
         time = toc - tic
-        print(f"Time to search image: {time}")
+        ctx.send(f"Time to search image with selenium: {time}")
+        print(f"Time to search image with selenium: {time}")
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
