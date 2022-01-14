@@ -129,6 +129,7 @@ class Google(commands.Cog):
             #     color=discord.Color.red()
             # )
             # await ctx.send("", embed=embed)
+            #old
             return
         try:
             if search_comma_numberlessthan11 == None:
