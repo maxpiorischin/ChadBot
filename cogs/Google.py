@@ -114,7 +114,7 @@ class Google(commands.Cog):
             # )'
         toc = perf_counter()
         time = toc - tic
-        await ctx.send(f"Time to search image with gurgle: {time}")
+        #await ctx.send(f"Time to search image with gurgle: {time}")
         print(f"Time to search image with gurgle: {time}")
 
     @commands.command(aliases=["oimg", "im"])
@@ -181,7 +181,7 @@ class Google(commands.Cog):
             )
         toc = perf_counter()
         time = toc - tic
-        await ctx.send(f"Time to search image with selenium: {time}")
+        #await ctx.send(f"Time to search image with selenium: {time}")
         print(f"Time to search image with selenium: {time}")
 
     @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
