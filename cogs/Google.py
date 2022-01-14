@@ -49,7 +49,7 @@ class Google(commands.Cog):
     async def img(
         self, ctx: commands.Context, *, content: commands.clean_content = None
     ):
-    tic = perf_counter()
+        tic = perf_counter()
         if ctx.message.author in self.banlist:
             msg = f"{get_fukt}&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
             return await ctx.embed(image_url=msg, color=invis)
