@@ -172,7 +172,6 @@ class Othercommands(commands.Cog):
         await ctx.send(BanList.banlist)
         
     @commands.command(aliases = ['del'])
-    @commands.has_permissions(manage_messages=True)
     async def delete(self, ctx, id):
         if id==None:
             await ctx.send("no ID provided")
