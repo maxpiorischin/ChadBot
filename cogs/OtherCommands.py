@@ -170,7 +170,14 @@ class Othercommands(commands.Cog):
     @commands.command()
     async def bannedusers(self, ctx):
         await ctx.send(BanList.banlist)
-
+        
+    @commands.command(aliases = ['del'])
+    @commands.has_permissions(manage_messages=True)
+    async def delete(self, ctx, id):
+        if ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.manage_messages:
+            msg = await ctx.channel.fetch_message(id)
+            print(msg)
+            
 
 
 
