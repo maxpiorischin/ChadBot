@@ -178,6 +178,7 @@ class Othercommands(commands.Cog):
         elif ctx.message.author.id == 281621038771732481 or ctx.message.author.guild_permissions.manage_messages:
             msg = await ctx.channel.fetch_message(id)
             await msg.delete()
+            print("Success")
             
 
 
