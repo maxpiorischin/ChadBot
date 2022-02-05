@@ -5,6 +5,6 @@ dnspython
 urllib3
 bs4
 googlesearch-python
-selenium==4.1.0
+selenium
 google_images_search
 motor
