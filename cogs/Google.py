@@ -93,7 +93,7 @@ class Google(commands.Cog):
         await self.MongoWorker.add_img(content, ctx.message.author, ctx.message.guild)
 
         if len(links) == 0:
-            return await ctx.embed(title="No Results Found!", color=invis)
+            return await ctx.embed(title='No Results Found! Try the "im" command instead!', color=invis)
 
         i = 0
         sent = False
