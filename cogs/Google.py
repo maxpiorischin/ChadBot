@@ -107,7 +107,7 @@ class Google(commands.Cog):
             await ctx.reply(content=link, mention_author=False)
 
         if not sent:
-            return await ctx.embed(title="No Results Found!", color=invis)
+            return await ctx.embed(title='No Results Found! Try the "im" command instead!', color=invis)
 
             # await ctx.embed(
             #     image_url=link, footer={"text": f"search term: {content}"}, color=invis
