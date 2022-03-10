@@ -8,3 +8,4 @@ googlesearch-python
 selenium
 google_images_search
 motor
+webdriver_manager

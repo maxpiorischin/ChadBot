@@ -6,6 +6,8 @@ import os
 from time import perf_counter
 import aiohttp
 import datetime
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 sys.path.append("..")
 from modules import Mongo, tools
@@ -35,9 +37,7 @@ class Google(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.driver = webdriver.Chrome(
-            executable_path=os.getenv("CHROME_EXECUTABLE_PATH"), options=option
-        )
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=option)
         self.MongoWorker = Mongo.MongoWorker()
         self.banlist = BanList.banlist
         self.link_cache = {}
