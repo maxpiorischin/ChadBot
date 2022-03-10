@@ -135,11 +135,12 @@ class Google(commands.Cog):
             if search_comma_numberlessthan11 == None:
                 ctx.send("Please add an input!")
                 return
-            if search_comma_numberlessthan11 == "Karen Tuk":
-                await ctx.send("https://cdn.discordapp.com/attachments/833549338373521441/951346507095867482/EF42D0AB-CE37-4F99-A051-082105BF84D8.JPG")
-                return
             message = await ctx.send("loading image...")
             search_term = "+".join(search_comma_numberlessthan11)
+            if search_term == "Karen+Tuk":
+                await ctx.send("https://cdn.discordapp.com/attachments/833549338373521441/951346507095867482/EF42D0AB-CE37-4F99-A051-082105BF84D8.JPG")
+                print("Karen Moment")
+                return
             last_val = search_term[len(search_term.rstrip("0123456789")) :]
             if last_val.isdigit():
                 if int(last_val) > 10 and "," in search_term:
