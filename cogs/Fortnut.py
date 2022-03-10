@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
-#Hello
-
+#test
 class Fortnut(commands.Cog):
     """ Gives info about the bot information"""
 
