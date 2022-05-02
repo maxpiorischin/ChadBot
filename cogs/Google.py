@@ -14,6 +14,7 @@ from modules import Mongo, tools
 from urllib.parse import quote
 
 from Chad import google_search
+search_safety_addition = '&safe=1'
 
 
 option = webdriver.ChromeOptions()
@@ -81,7 +82,7 @@ class Google(commands.Cog):
         #             del self.link_cache[content]
 
         if len(links) == 0:
-            j_links = await self.client.ahttp.get_json(google_search + search_term)
+            j_links = await self.client.ahttp.get_json(google_search + search_term + search_safety_addition)
             if j_links != {} and len(j_links) > 0:
                 links = j_links
                 self.link_cache[content] = links
@@ -117,7 +118,7 @@ class Google(commands.Cog):
         #await ctx.send(f"Time to search image with gurgle: {time}")
         print(f"Time to search image with gurgle: {time}")
 
-    @commands.command(aliases=["oimg", "im"])
+    #@commands.command(aliases=["oimg", "im"])
     async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
