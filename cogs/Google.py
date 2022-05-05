@@ -190,7 +190,7 @@ class Google(commands.Cog):
         #await ctx.send(f"Time to search image with selenium: {time}")
         print(f"Time to search image with selenium: {time}")
 
-    @commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
+    #@commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
         if ctx.message.author in self.banlist:
             msg = f"https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
