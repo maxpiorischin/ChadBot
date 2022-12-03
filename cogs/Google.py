@@ -1,12 +1,10 @@
 import discord
 from discord.ext import commands
 import sys
-from selenium import webdriver
 import os
 from time import perf_counter
 import aiohttp
 import datetime
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 sys.path.append("..")
@@ -15,14 +13,6 @@ from urllib.parse import quote
 
 from Chad import google_search
 search_safety_addition = '&safe=1'
-
-
-option = webdriver.ChromeOptions()
-
-option.binary_location = os.getenv("GOOGLE_CHROME_BIN")
-option.add_argument("--headless")
-option.add_argument("--disable-gpu")
-option.add_argument("--no-sandbox")
 
 sys.path.append("..")
 from modules import LinkGrabber
@@ -38,7 +28,6 @@ class Google(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=option)
         self.MongoWorker = Mongo.MongoWorker()
         self.banlist = BanList.banlist
         self.link_cache = {}
@@ -119,7 +108,7 @@ class Google(commands.Cog):
         print(f"Time to search image with gurgle: {time}")
 
     #@commands.command(aliases=["oimg", "im"])
-    async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):
+    """async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
             msg = f"https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
@@ -189,7 +178,7 @@ class Google(commands.Cog):
         time = toc - tic
         #await ctx.send(f"Time to search image with selenium: {time}")
         print(f"Time to search image with selenium: {time}")
-
+"""
     #@commands.command(aliases=["smallpic", "spic", "simg", "smallimage"])
     async def smallimg(self, ctx, *search):
         if ctx.message.author in self.banlist:
@@ -261,5 +250,5 @@ class Google(commands.Cog):
             )
 
 
-def setup(client):
-    client.add_cog(Google(client))
+async def setup(client):
+    await client.add_cog(Google(client))

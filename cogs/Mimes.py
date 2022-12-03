@@ -87,7 +87,7 @@ class Mimes(commands.Cog):
             self.bot.add_command(cmd)
 
 
-def setup(bot):
+async def setup(bot):
     cog = Mimes(bot)
-    bot.add_cog(cog)
+    await bot.add_cog(cog)
     cog.add_meme_commands()

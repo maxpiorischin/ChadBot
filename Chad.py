@@ -3,6 +3,7 @@ from discord.ext import commands
 import pymongo
 from pymongo import MongoClient
 import os
+import asyncio
 
 from modules.tools import quick_embed
 from modules.ahttp import HTTP
@@ -52,6 +53,7 @@ if __name__ == "__main__":
                 type=discord.ActivityType.watching, name=f"{members} users!"
             ),
         )
+        h
         print("Chad is ready!")
 
     @client.command()
@@ -62,15 +64,22 @@ if __name__ == "__main__":
     async def unload(ctx, extension):
         await client.unload_extension(f"cogs.{extension}")
 
-    print("-------------------")
-    for cog in os.listdir("./cogs"):
-        if cog.endswith(".py"):
-            try:
-                await client.load_extension(f"cogs.{cog[:-3]}")
-                print(f"{cog} Loaded!")
-            except Exception as e:
-                print(f"{cog} cannot be loaded:")
-                raise e
+    async def load_extensions():  
+        print("-------------------")
+        for cog in os.listdir("./cogs"):
+            if cog.endswith(".py"):
+                try:
+                    await client.load_extension(f"cogs.{cog[:-3]}")
+                    print(f"{cog} Loaded!")
+                except Exception as e:
+                    print(f"{cog} cannot be loaded:")
+                    raise e
     print("-------------------")
 
-    client.run(token)
+    async def main():
+        async with client:
+            await load_extensions()
+            await client.start(token)
+
+    asyncio.run(main())
+

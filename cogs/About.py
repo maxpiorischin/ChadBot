@@ -81,5 +81,5 @@ class About(commands.Cog):
         await self.MongoWorker.add_misc("help", "help", ctx.message.author, ctx.message.guild)
 
 
-def setup(client):
-    client.add_cog(About(client))
+async def setup(client):
+    await client.add_cog(About(client))

@@ -71,5 +71,5 @@ class Fortnut(commands.Cog):
 
 
 
-def setup(client):
-    client.add_cog(Fortnut(client))
+async def setup(client):
+    await client.add_cog(Fortnut(client))
