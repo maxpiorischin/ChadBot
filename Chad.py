@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     commands.Context.embed = embed_wrapper
 
-    client = commands.Bot(command_prefix=get_prefix, help_command=help_command)
+    client = commands.Bot(command_prefix=get_prefix, help_command=help_command, intents=discord.Intents.default())
     client.remove_command("help")
     client.ahttp = HTTP()
 
@@ -56,17 +56,17 @@ if __name__ == "__main__":
 
     @client.command()
     async def load(ctx, extension):
-        client.load_extension(f"cogs.{extension}")
+        await client.load_extension(f"cogs.{extension}")
 
     @client.command()
     async def unload(ctx, extension):
-        client.unload_extension(f"cogs.{extension}")
+        await client.unload_extension(f"cogs.{extension}")
 
     print("-------------------")
     for cog in os.listdir("./cogs"):
         if cog.endswith(".py"):
             try:
-                client.load_extension(f"cogs.{cog[:-3]}")
+                await client.load_extension(f"cogs.{cog[:-3]}")
                 print(f"{cog} Loaded!")
             except Exception as e:
                 print(f"{cog} cannot be loaded:")
