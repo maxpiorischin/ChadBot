@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     commands.Context.embed = embed_wrapper
 
-    client = commands.Bot(command_prefix=get_prefix, help_command=help_command)
+    client = commands.Bot(command_prefix=get_prefix, help_command=help_command, intents=discord.Intents.default())
     client.remove_command("help")
     client.ahttp = HTTP()
 
