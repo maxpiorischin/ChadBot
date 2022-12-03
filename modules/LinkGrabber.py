@@ -3,11 +3,9 @@ import aiohttp, asyncio
 import re
 from bs4 import BeautifulSoup as Soup
 from googlesearch import search
-from google_images_search import GoogleImagesSearch
 from selenium import webdriver
 import os
 
-gis = GoogleImagesSearch(os.getenv('google_api'), os.getenv("google_cx"), validate_images=False)
 ytsearch_url = "https://www.youtube.com/results?search_query="
 video_url = "https://www.youtube.com/watch?v="
 google_images_url = "https://www.google.co.in/search?q="
@@ -43,32 +41,32 @@ async def videograbber(searchterm):
     return linkcreator(video_url, video_ids[0])
 
 
-async def imagegrabber(searchterm, driver, num):
-    url = google_images_url + searchterm + google_images_url_end
-    driver.get(url)
-    html = driver.page_source.split('["')
-    imges = []
-    for i in html:
-        if i.startswith('http') and i.split('"')[0].split('.')[-1] in extensions:
-            imges.append(i.split('"')[0])
-            if num == 0:
-                break
-            num -= 1
-    return imges
+# async def imagegrabber(searchterm, driver, num):
+#     url = google_images_url + searchterm + google_images_url_end
+#     driver.get(url)
+#     html = driver.page_source.split('["')
+#     imges = []
+#     for i in html:
+#         if i.startswith('http') and i.split('"')[0].split('.')[-1] in extensions:
+#             imges.append(i.split('"')[0])
+#             if num == 0:
+#                 break
+#             num -= 1
+#     return imges
 
 
-def googleapiimagegrabber(searchterm, num):  # LIMITED QUERIES, HUGE RATE LIMIT
-    _search_params = {
-        'q': searchterm,
-        'num': num,
-    }
-    gis.search(search_params=_search_params)
-    links = []
-    for obj in gis.results():
-        links.append(obj.url)
-    gis._search_result = []
-    print(links)
-    return links
+# def googleapiimagegrabber(searchterm, num):  # LIMITED QUERIES, HUGE RATE LIMIT
+#     _search_params = {
+#         'q': searchterm,
+#         'num': num,
+#     }
+#     gis.search(search_params=_search_params)
+#     links = []
+#     for obj in gis.results():
+#         links.append(obj.url)
+#     gis._search_result = []
+#     print(links)
+#     return links
 
 
 async def smallimagegrabber(searchterm):

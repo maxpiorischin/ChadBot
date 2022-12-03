@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     commands.Context.embed = embed_wrapper
 
-    client = commands.Bot(command_prefix=get_prefix, help_command=help_command, intents=discord.Intents.default())
+    client = commands.Bot(command_prefix=get_prefix, help_command=help_command, intents=discord.Intents.all())
     client.remove_command("help")
     client.ahttp = HTTP()
 
@@ -53,7 +53,6 @@ if __name__ == "__main__":
                 type=discord.ActivityType.watching, name=f"{members} users!"
             ),
         )
-        h
         print("Chad is ready!")
 
     @client.command()

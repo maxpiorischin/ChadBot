@@ -31,6 +31,7 @@ class Google(commands.Cog):
         self.MongoWorker = Mongo.MongoWorker()
         self.banlist = BanList.banlist
         self.link_cache = {}
+        self.session = aiohttp.ClientSession()
 
     # commands
     # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
@@ -71,7 +72,9 @@ class Google(commands.Cog):
         #             del self.link_cache[content]
 
         if len(links) == 0:
-            j_links = await self.client.ahttp.get_json(google_search + search_term + search_safety_addition)
+            async with self.session.get(google_search + search_term + search_safety_addition) as resp:
+                j_links = await resp.json()
+                print(j_links)
             if j_links != {} and len(j_links) > 0:
                 links = j_links
                 self.link_cache[content] = links
