@@ -7,3 +7,4 @@ data
 venv
 ffmpeg/doc
 junk
+docker-compose.yml
