@@ -14,6 +14,5 @@ async def videograbber(searchterm):
         text = await resp.text()
     await session.close()
     video_ids = re.findall(r"watch\?v=(\S{11})", text)
-    print(video_ids)
 
 asyncio.run(videograbber("roblox"))
