@@ -19,7 +19,7 @@ from modules import LinkGrabber
 from smalldata import BanList
 
 
-get_fukt = "https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png"
+banned_default = "https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png"
 invis = 0x2F3136
 
 
@@ -42,7 +42,7 @@ class Google(commands.Cog):
     ):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
-            msg = f"{get_fukt}&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
+            msg = f"{banned_default}&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
             return await ctx.embed(image_url=msg, color=invis)
 
         if content is None:

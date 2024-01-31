@@ -1,12 +1,12 @@
-import discord
+import discord, os, asyncio
 from discord.ext import commands
-import pymongo
 from pymongo import MongoClient
-import os
-import asyncio
+from dotenv import load_dotenv
 
 from modules.tools import quick_embed
 from modules.ahttp import HTTP
+
+load_dotenv()
 
 token = os.getenv("CHAD_BOT_TOKEN")
 cluster = MongoClient(os.getenv("MONGODB_CONNECTION"))
