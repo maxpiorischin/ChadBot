@@ -108,7 +108,7 @@ class Othercommands(commands.Cog):
                 else:
                     BanList.banlist.append(user)
                     embed = discord.Embed(
-                        title="cya",
+                        title="BANNED",
                         description="Banned " + user.name,
                         color=discord.Color.blue()
                     )
