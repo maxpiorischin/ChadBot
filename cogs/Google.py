@@ -19,7 +19,7 @@ from modules import LinkGrabber
 from smalldata import BanList
 
 
-get_fukt = "https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png"
+banned_default = "https://mime.rcp.r9n.co/memes/default?image=https://cdn.discordapp.com/attachments/829072008733261834/918301693186297856/unknown.png"
 invis = 0x2F3136
 
 
@@ -34,7 +34,6 @@ class Google(commands.Cog):
         self.session = aiohttp.ClientSession()
 
     # commands
-    # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
 
     @commands.command(aliases=["pic", "image"])
     async def img(
@@ -42,8 +41,7 @@ class Google(commands.Cog):
     ):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
-            msg = f"{get_fukt}&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
-            return await ctx.embed(image_url=msg, color=invis)
+            return await ctx.embed(title="Sorry, You're Banned!", color=invis)
 
         if content is None:
             return await ctx.embed(title="Missing Search Term", color=invis)
@@ -57,8 +55,6 @@ class Google(commands.Cog):
             )
 
         search_term = quote(content)
-
-        print(f"searching: {content} | {number} \t in {ctx.guild.name}")
 
         links = self.link_cache.get(content, [])
         # if content in self.link_cache:
@@ -108,7 +104,6 @@ class Google(commands.Cog):
         toc = perf_counter()
         time = toc - tic
         #await ctx.send(f"Time to search image with gurgle: {time}")
-        print(f"Time to search image with gurgle: {time}")
 
     #@commands.command(aliases=["oimg", "im"])
     """async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):

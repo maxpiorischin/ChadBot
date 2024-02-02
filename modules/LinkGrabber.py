@@ -3,8 +3,6 @@ import aiohttp, asyncio
 import re
 from bs4 import BeautifulSoup as Soup
 from googlesearch import search
-from selenium import webdriver
-import os
 
 ytsearch_url = "https://www.youtube.com/results?search_query="
 video_url = "https://www.youtube.com/watch?v="
@@ -30,43 +28,25 @@ async def get_soup(url, header, issoup):
     return text
 
 
-def linkcreator(url, id):
-    return url + id
+def filter_videos(video_ids, number):
+    links = [video_url + video_ids[0]]
+    i = 1
+    while i < number:
+        if video_ids[i] != video_ids[i-1]:
+            link = video_url + video_ids[i]
+            links.append(link)
+        else:
+            number += 1
+        i += 1
+    return links
 
 
-async def videograbber(searchterm):
+
+async def videograbber(searchterm, number):
     final_url = ytsearch_url + searchterm
     text = await get_soup(final_url, REQUEST_HEADER, False)
     video_ids = re.findall(r"watch\?v=(\S{11})", text)
-    return linkcreator(video_url, video_ids[0])
-
-
-# async def imagegrabber(searchterm, driver, num):
-#     url = google_images_url + searchterm + google_images_url_end
-#     driver.get(url)
-#     html = driver.page_source.split('["')
-#     imges = []
-#     for i in html:
-#         if i.startswith('http') and i.split('"')[0].split('.')[-1] in extensions:
-#             imges.append(i.split('"')[0])
-#             if num == 0:
-#                 break
-#             num -= 1
-#     return imges
-
-
-# def googleapiimagegrabber(searchterm, num):  # LIMITED QUERIES, HUGE RATE LIMIT
-#     _search_params = {
-#         'q': searchterm,
-#         'num': num,
-#     }
-#     gis.search(search_params=_search_params)
-#     links = []
-#     for obj in gis.results():
-#         links.append(obj.url)
-#     gis._search_result = []
-#     print(links)
-#     return links
+    return filter_videos(video_ids, number)
 
 
 async def smallimagegrabber(searchterm):

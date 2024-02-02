@@ -11,3 +11,4 @@ selenium~=4.1.0
 requests~=2.25.1
 aiohttp~=3.8.3
 beautifulsoup4~=4.9.3
+python-dotenv~=1.0.1
