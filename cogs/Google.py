@@ -34,7 +34,6 @@ class Google(commands.Cog):
         self.session = aiohttp.ClientSession()
 
     # commands
-    # THE COMMENTS REPRESENT THE OLD CODE, WITH LIMITED API IMAGE LOADING
 
     @commands.command(aliases=["pic", "image"])
     async def img(
@@ -42,8 +41,7 @@ class Google(commands.Cog):
     ):
         tic = perf_counter()
         if ctx.message.author in self.banlist:
-            msg = f"{banned_default}&top=get_fukt_{quote(ctx.message.author.name)}&bottom=ur_banned"
-            return await ctx.embed(image_url=msg, color=invis)
+            return await ctx.embed(title="Sorry, You're Banned!", color=invis)
 
         if content is None:
             return await ctx.embed(title="Missing Search Term", color=invis)
