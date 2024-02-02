@@ -15,12 +15,16 @@ class Youtube(commands.Cog):
     # commands
 
     @commands.command(aliases = ["yt"])
-    async def youtube(self, ctx, *search):
-        search_term = '+'.join(search)
-        print("searching: " +search_term)
-        link = await LinkGrabber.videograbber(search_term)
-        await ctx.send(link)
-        await self.MongoWorker.add_youtube("yt", search_term, ctx.message.author, ctx.message.guild)
+    async def youtube(self, ctx, *, search):
+        number = 1
+        if "," in search:
+            full = search.split(",")
+            search = full[0].replace(' ', '+')
+            number = int(full[1])
+        links = await LinkGrabber.videograbber(search, min(10, number))
+        for link in links:
+            await ctx.send(link)
+        await self.MongoWorker.add_youtube("yt", search, ctx.message.author, ctx.message.guild)
 
 
 

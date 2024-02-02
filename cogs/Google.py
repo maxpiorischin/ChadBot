@@ -56,8 +56,6 @@ class Google(commands.Cog):
 
         search_term = quote(content)
 
-        print(f"searching: {content} | {number} \t in {ctx.guild.name}")
-
         links = self.link_cache.get(content, [])
         # if content in self.link_cache:
         #     c_links, timestamp = self.link_cache[content]
@@ -106,7 +104,6 @@ class Google(commands.Cog):
         toc = perf_counter()
         time = toc - tic
         #await ctx.send(f"Time to search image with gurgle: {time}")
-        print(f"Time to search image with gurgle: {time}")
 
     #@commands.command(aliases=["oimg", "im"])
     """async def ogimg(self, ctx: commands.Context, *search_comma_numberlessthan11):

@@ -28,15 +28,25 @@ async def get_soup(url, header, issoup):
     return text
 
 
-def linkcreator(url, id):
-    return url + id
+def filter_videos(video_ids, number):
+    links = [video_url + video_ids[0]]
+    i = 1
+    while i < number:
+        if video_ids[i] != video_ids[i-1]:
+            link = video_url + video_ids[i]
+            links.append(link)
+        else:
+            number += 1
+        i += 1
+    return links
 
 
-async def videograbber(searchterm):
+
+async def videograbber(searchterm, number):
     final_url = ytsearch_url + searchterm
     text = await get_soup(final_url, REQUEST_HEADER, False)
-    video_ids = re.findall(r"watch\?v=(\S{11})", text) #todo add multiple functionality
-    return linkcreator(video_url, video_ids[0])
+    video_ids = re.findall(r"watch\?v=(\S{11})", text)
+    return filter_videos(video_ids, number)
 
 
 async def smallimagegrabber(searchterm):
